@@ -19,8 +19,8 @@ Gem::Specification.new do |spec|
   spec.metadata['source_code_uri'] = spec.homepage
   spec.metadata['changelog_uri'] = File.join(spec.homepage, 'blob', 'main', 'CHANGELOG.md')
 
-  spec.require_paths = [File.join('lib', 'source')]
-  spec.files = Dir[File.join('lib', 'source', '**', '*')].select do |path|
+  spec.require_paths = ['lib']
+  spec.files = Dir[File.join('lib', '**', '*')].select do |path|
     !Dir.exist?(path) && !['version.rb'].include?(File.basename(path))
   end
 
