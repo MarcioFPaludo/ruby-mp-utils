@@ -20,7 +20,7 @@ class Message
   # Initializes a new instance of the Message class with a given message template.
   #
   # @param message [String] The message template to be used.
-  # @param replaces [String] The replaces Hash used to change key finded in @message by custom values.
+  # @param replaces [Hash] Used to replace all occurrences of a key with its value.
   def initialize(message, replaces: nil)
     raise 'Messsage replaces content need be a Hash' if !replaces.nil? && !replaces.is_a?(Hash)
 
