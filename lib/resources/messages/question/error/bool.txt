@@ -1,0 +1,3 @@
+You need to answer with "Yes or No" only.
+These are the valid response options: Yes, No, Y, N
+Note: You can use both lowercase and uppercase letters for the answers.
