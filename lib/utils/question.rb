@@ -11,7 +11,7 @@ class Question
   #
   # @param message [String] The question message to be displayed to the user.
   def initialize(message)
-    @message = message
+    @message = Message.new(message)
   end
 
   # Prompts the user with a boolean question and returns the answer as true or false.
@@ -105,10 +105,10 @@ class Question
   # @return [Integer] The user's input adjusted to be zero-based (input - 1) and validated to be within the range.
   def read_index_input(count:, error_message: nil)
     loop do
-      error = error_message || File.join('question', 'error', 'index')
-      index = integer_answer(error_message: error) - 1
+      index = integer_answer(error_message: error_message) - 1
       return index if index >= 0 && index < count
 
+      error = error_message || File.join('question', 'error', 'index')
       puts Message.new(error)
     end
   end
