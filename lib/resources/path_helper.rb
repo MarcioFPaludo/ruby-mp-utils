@@ -18,7 +18,7 @@ module Resources
   # {define} method. This method allows for easy retrieval of the custom path, facilitating flexible
   # resource management.
   #
-  # @return [String, nil] the custom resources path as defined by the environment variable, or nil if it hasn't been set.
+  # @return [String, nil] the custom path as defined by the environment variable, or nil if it hasn't been set.
   def self.custom_path
     ENV['SCRIPT_CUSTOM_RESOURCES']
   end

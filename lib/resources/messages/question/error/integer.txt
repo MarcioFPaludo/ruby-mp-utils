@@ -1,0 +1,2 @@
+You need to provide an integer numeric value.
+Example: 123456

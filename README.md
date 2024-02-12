@@ -92,6 +92,58 @@ puts message.to_s
 # We hope you are well Alice!
 ```
 
+#### Question
+
+The Question class was created with the objective of asking questions to the user.  
+It receives a message that will be presented as a question to the user when a response method is called.  
+All messages received by the class are automatically placed in an instance of Message.  
+Here are some examples with the available answers:
+
+1. Boolean Answer
+
+```ruby
+# Asking the user a yes/no question and processing the response.
+question = Question.new("Do you like Ruby?")
+puts question.bool_answer ? "You like Ruby!" : "You don't like Ruby?"
+````
+
+2. Float Answer
+
+```ruby
+# Asking the user for a floating-point number, such as a version number.
+question = Question.new("What is the value of pi?")
+version = question.float_answer 
+puts "The value of pi is #{version}"
+```
+
+3. Integer Answer
+
+```ruby
+# Prompting for an integer, for example, asking for a quantity.
+question = Question.new("How many Ruby gems do you need?")
+quantity = question.integer_answer
+puts "You need #{quantity} gems."
+```
+
+4. Option Answer
+
+```ruby
+# Allowing the user to choose from a list of options.
+question = Question.new("Choose your preferred Ruby web framework:")
+options = ["Rails", "Sinatra", "Hanami"]
+framework = question.option_answer(options)
+puts "You have chosen #{framework}."
+```
+
+5. String Answer
+
+```ruby
+# Asking for a string input that matches a specific pattern, such as a name.
+question = Question.new("What is your name?")
+name = question.string_answer(regex: /^[A-Za-z ]+$/)
+puts "Hello, #{name}!"
+```
+
 ## Development
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).

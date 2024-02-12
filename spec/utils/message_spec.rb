@@ -5,10 +5,9 @@ require_relative '../../lib/utils/message'
 RSpec.describe Message do
   describe '.new' do
     it 'should raise error if object is not a Hash' do
-      expect {Message.new('', replaces: [])}.to raise_error('Messsage replaces content need be a Hash')
+      expect { Message.new('', replaces: []) }.to raise_error('Messsage replaces content need be a Hash')
     end
   end
-
 
   describe '.equals' do
     it 'instances with same message should be equal' do
@@ -44,7 +43,7 @@ RSpec.describe Message do
     end
 
     it 'should replace keys with given replaces values' do
-      replaces = { Key.new('username') => 'Alice', Key.new('code') => 'XYZ123'} 
+      replaces = { Key.new('username') => 'Alice', Key.new('code') => 'XYZ123' }
       message = 'Welcome, <||username||>! Your code is <||code||>.'
       message += "\nWe hope you are well <||username||>!"
 
@@ -55,7 +54,7 @@ RSpec.describe Message do
 
     it 'should replace valid keys with resource messages and replace keys with given replaces values' do
       message = "<||hellow_world||>\nWe hope you are well <||username||>!"
-      replaces = { '<||username||>' => 'Alice' } 
+      replaces = { '<||username||>' => 'Alice' }
 
       result = "Hellow World from MPUtils!\nWe hope you are well Alice!"
       expect(Message.new(message, replaces: replaces).to_s).to eq(result)

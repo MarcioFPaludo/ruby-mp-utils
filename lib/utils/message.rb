@@ -20,10 +20,11 @@ class Message
   # Initializes a new instance of the Message class with a given message template.
   #
   # @param message [String] The message template to be used.
-  # @param replaces [String] The replaces Hash used to change key finded in @message by custom values.
+  # @param replaces [Hash] Used to replace all occurrences of a key with its value.
   def initialize(message, replaces: nil)
     raise 'Messsage replaces content need be a Hash' if !replaces.nil? && !replaces.is_a?(Hash)
-    @replaces = replaces
+
+    @to_replace = replaces
     @message = message
   end
 
@@ -42,29 +43,8 @@ class Message
   #
   # @return [String] The formatted message with placeholders substituted with actual content.
   def to_s
-    new_message = String.new(@message)
-    keys = Key.find_keys_in(@message)
-
-    if keys.count.positive?
-      keys.each do |key|
-        message = recover_message_with(key.value)
-        new_message.gsub!(key.to_s, message) if message != key.value
-      end
-    else
-      new_message = recover_message_with(new_message)
-    end
-
-    if !@replaces.nil?
-      @replaces.each do |key, value|
-        if key.is_a?(Key)
-          new_message.gsub!(key.to_regexp, value.to_s)
-        else
-          new_message.gsub!(/#{Regexp.escape(key.to_s)}/, value.to_s)
-        end
-      end
-    end
-
-    new_message
+    new_message = replace_message_keys(String.new(@message))
+    replace_all_to_replace_elements(new_message)
   end
 end
 
@@ -88,6 +68,40 @@ class Message
   # @return [String] The path to the default library of message files.
   def library_path
     File.join(Resources.library_path, 'messages')
+  end
+
+  # Replaces keys found in the original message with their corresponding values.
+  #
+  # @param message [String] The original message with keys to be replaced.
+  # @return [String] The message with keys replaced by their corresponding values.
+  def replace_message_keys(message)
+    keys = Key.find_keys_in(message)
+    return recover_message_with(message) if keys.empty?
+
+    keys.each do |key|
+      key_message = recover_message_with(key.value)
+      message.gsub!(key.to_s, key_message) if key_message != key.value
+    end
+
+    message
+  end
+
+  # Replaces all placeholders in the message with their corresponding values from the @to_replace hash.
+  #
+  # @param message [String] The message with placeholders to replace.
+  # @return [String] The message with all placeholders replaced with actual content.
+  def replace_all_to_replace_elements(message)
+    return message if @to_replace.nil?
+
+    @to_replace.each do |key, value|
+      if key.is_a?(Key)
+        message.gsub!(key.to_regexp, value.to_s)
+      else
+        message.gsub!(/#{Regexp.escape(key.to_s)}/, value.to_s)
+      end
+    end
+
+    message
   end
 
   # Attempts to recover and return the content of a message file identified by the file_name parameter.
