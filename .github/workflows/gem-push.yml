@@ -1,0 +1,94 @@
+name: Publish Gem
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build + Publish
+    runs-on: ubuntu-latest
+    if: >
+      github.event.pull_request.merged == true &&
+      contains(join(github.event.pull_request.labels.*.name, ','), 'version:major') ||
+      contains(join(github.event.pull_request.labels.*.name, ','), 'version:minor') ||
+      contains(join(github.event.pull_request.labels.*.name, ','), 'version:patch')
+    permissions:
+      contents: read
+      packages: write
+    build:
+    name: Build + Publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby 2.6
+      uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
+      with:
+        ruby-version: 2.6.x
+
+    - name: Bundle Install
+      run: bundle check || bundle install -j 20
+
+    - name: Read PR labels and Bump Version
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        PR_NUMBER=$(jq --raw-output .number "$GITHUB_EVENT_PATH")
+        LABELS=$(curl -s \
+          -H "Authorization: token $GITHUB_TOKEN" \
+          -H "Accept: application/vnd.github+json" \
+          https://api.github.com/repos/${{ github.repository }}/issues/$PR_NUMBER/labels | jq -r '.[].name')
+        
+        echo "PR Labels: $LABELS"
+
+        for LABEL in $LABELS; do
+          case "$LABEL" in
+            "version:major")
+              rake version:major
+              ;;
+            "version:minor")
+              rake version:minor
+              ;;
+            "version:patch")
+              rake version:patch
+              ;;
+            *)
+              echo "No matching version bump task for label $LABEL"
+              ;;
+          esac
+        done
+
+    - name: Generate Documentation
+      run: |
+        yard doc
+        mkdir -p docs
+        mv -f doc/* docs/
+
+    - name: Publish to GPR
+      run: |
+        mkdir -p $HOME/.gem
+        touch $HOME/.gem/credentials
+        chmod 0600 $HOME/.gem/credentials
+        printf -- "---\n:github: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+        gem build *.gemspec
+        gem push --KEY github --host https://rubygems.pkg.github.com/${OWNER} *.gem
+      env:
+        GEM_HOST_API_KEY: "Bearer ${{secrets.GITHUB_TOKEN}}"
+        OWNER: ${{ github.repository_owner }}
+
+    - name: Publish to RubyGems
+      run: |
+        mkdir -p $HOME/.gem
+        touch $HOME/.gem/credentials
+        chmod 0600 $HOME/.gem/credentials
+        printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+        gem build *.gemspec
+        gem push *.gem
+      env:
+        GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
