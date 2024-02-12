@@ -14,3 +14,4 @@ end
 gem 'rake'
 gem 'rubocop'
 gem 'solargraph'
+gem 'yard'
