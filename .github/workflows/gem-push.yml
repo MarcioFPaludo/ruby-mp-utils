@@ -10,19 +10,15 @@ jobs:
   build:
     name: Build + Publish
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     if: >
       github.event.pull_request.merged == true &&
       contains(join(github.event.pull_request.labels.*.name, ','), 'version:major') ||
       contains(join(github.event.pull_request.labels.*.name, ','), 'version:minor') ||
       contains(join(github.event.pull_request.labels.*.name, ','), 'version:patch')
-    permissions:
-      contents: read
-      packages: write
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
+    
     steps:
     - uses: actions/checkout@v3
     - name: Set up Ruby 2.6
