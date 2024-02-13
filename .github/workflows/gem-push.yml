@@ -64,6 +64,14 @@ jobs:
         mkdir -p docs
         mv -f doc/* docs/
 
+    - name: Configure Git And Commit changes
+      run: |
+        git config user.name "MarcioFPaludo"
+        git config user.email "marciof.paludo@gmail.com"
+        git add .
+        git commit -m "Commit via GitHub Action" || echo "Nenhuma mudança para commitar."
+        git push
+
     # - name: Publish to GPR
     #   run: |
     #     mkdir -p $HOME/.gem
