@@ -5,7 +5,7 @@ require_relative '../../lib/utils/question'
 RSpec.describe Question do
   response = 'This message should be replaced'
 
-  describe '.string_answer' do
+  describe '#string_answer' do
     let(:input_response) { 'My name is Alice' }
     let(:question) { Question.new(message) }
     let(:message) { 'What is your name?' }
@@ -35,7 +35,7 @@ RSpec.describe Question do
     end
   end
 
-  describe '.bool_answer' do
+  describe '#bool_answer' do
     let(:question) { Question.new('Is Ruby fun to learn?') }
     let(:expected_output) do
       <<~OUTPUT
@@ -76,7 +76,7 @@ RSpec.describe Question do
     end
   end
 
-  describe '.float_answer' do
+  describe '#float_answer' do
     let(:message) { 'Enter a floating-point number:' }
     let(:question) { Question.new(message) }
 
@@ -97,7 +97,7 @@ RSpec.describe Question do
     end
   end
 
-  describe '.integer_answer' do
+  describe '#integer_answer' do
     let(:question) { Question.new(message) }
     let(:message) { 'Enter an integer:' }
 
@@ -118,7 +118,7 @@ RSpec.describe Question do
     end
   end
 
-  describe '.option_answer' do
+  describe '#option_answer' do
     options = %w[option1 option2 option3]
     let(:question) { Question.new('Choose an option:') }
 

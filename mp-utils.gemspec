@@ -18,10 +18,8 @@ Gem::Specification.new do |spec|
     It can centralize messages in files and also add facilitators for the recovery and manipulation of some contents.
   DESC
 
-  spec.metadata['rubygems_mfa_required'] = 'true'
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = spec.homepage
-  spec.metadata['changelog_uri'] = File.join(spec.homepage, 'blob', 'main', 'CHANGELOG.md')
 
   spec.require_paths = ['lib']
   spec.files = Dir[File.join('lib', '**', '*')].select do |path|
