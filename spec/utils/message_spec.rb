@@ -9,14 +9,14 @@ RSpec.describe Message do
     end
   end
 
-  describe '.equals' do
+  describe '#equals' do
     it 'instances with same message should be equal' do
       value = 'Minha mensagem para testes'
       expect(Message.new(value)).to eq(Message.new(value))
     end
   end
 
-  describe '.to_s' do
+  describe '#to_s' do
     it 'should return the same massage passed in instance' do
       value = 'Minha mensagem para testes'
       expect(Message.new(value).to_s).to eq(value)
