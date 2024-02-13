@@ -1,5 +1,7 @@
 # MPUtils
 
+[![Gem Version](https://badge.fury.io/rb/mp-utils.png)](https://badge.fury.io/rb/mp-utils)
+
 The MP-Utils library aims to facilitate the writing of daily scripts.  
 It can centralize messages in files and also add facilitators for the recovery and manipulation of some contents.
 
