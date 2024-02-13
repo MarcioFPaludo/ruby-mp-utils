@@ -24,7 +24,7 @@ jobs:
     - name: Set up Ruby 2.6
       uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
       with:
-        ruby-version: 2.6.x
+        ruby-version: 2.6.10
 
     - name: Bundle Install
       run: bundle check || bundle install -j 20
