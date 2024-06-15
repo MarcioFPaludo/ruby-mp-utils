@@ -1,0 +1,64 @@
+name: Release Gem
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['2.6', '2.7', '3.0', '3.2']
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+        
+    - name: Bundle Install
+      run: bundle check || bundle install -j 20
+  
+    - name: Rubocop
+      run: bundle exec rubocop
+
+    - name: RSpec
+      run: bundle exec rspec --format documentation
+  release:
+    needs: tests
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6
+
+    - name: Install dependencies
+      run: bundle check || bundle install -j 20
+
+    - name: Generate Documentation
+      run: |
+        yard doc
+        mkdir -p docs
+        mv -f doc/* docs/
+        
+    - name: Build gem
+      run: gem build mp-utils.gemspec
+
+    - name: Publish gem
+      env:
+        RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_AUTH_TOKEN }}
+      run: gem push mp-utils-*.gem
