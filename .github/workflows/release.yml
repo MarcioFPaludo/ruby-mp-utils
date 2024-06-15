@@ -35,7 +35,6 @@ jobs:
   release:
     needs: tests
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
 
     steps:
     - name: Checkout code
@@ -60,5 +59,6 @@ jobs:
 
     - name: Publish gem
       env:
-        RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_AUTH_TOKEN }}
-      run: gem push mp-utils-*.gem
+        GEM_HOST_API_KEY: ${{ secrets.GEM_HOST_API_KEY }}
+        GEM_HOST_OTP_CODE: ${{ github.event.inputs.otp_code }}
+      run: echo $GEM_HOST_OTP_CODE | gem push mp-utils-*.gem --otp

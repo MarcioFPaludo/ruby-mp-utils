@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = spec.homepage
+  spec.metadata['rubygems_mfa_required'] = 'true'
 
   spec.require_paths = ['lib']
   spec.files = Dir[File.join('lib', '**', '*')].select do |path|
