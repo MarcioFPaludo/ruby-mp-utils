@@ -11,27 +11,7 @@ permissions:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby-version: ['2.6', '2.7', '3.0', '3.2']
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
-      with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true
-        
-    - name: Bundle Install
-      run: bundle check || bundle install -j 20
-  
-    - name: Rubocop
-      run: bundle exec rubocop
-
-    - name: RSpec
-      run: bundle exec rspec --format documentation
+    uses: ./.github/workflows/ruby-tests.yml
   release:
     needs: tests
     runs-on: ubuntu-latest
@@ -43,22 +23,16 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.6
+        ruby-version: '2.6'
 
     - name: Install dependencies
       run: bundle check || bundle install -j 20
 
-    - name: Generate Documentation
-      run: |
-        yard doc
-        mkdir -p docs
-        mv -f doc/* docs/
-        
     - name: Build gem
       run: gem build mp-utils.gemspec
 
     - name: Publish gem
       env:
         GEM_HOST_API_KEY: ${{ secrets.GEM_HOST_API_KEY }}
-        GEM_HOST_OTP_CODE: ${{ github.event.inputs.otp_code }}
-      run: echo $GEM_HOST_OTP_CODE | gem push mp-utils-*.gem --otp
+        GEM_HOST_OTP_CODE: ${{ secrets.GEM_HOST_OTP_CODE }}
+      run: gem push mp-utils-*.gem

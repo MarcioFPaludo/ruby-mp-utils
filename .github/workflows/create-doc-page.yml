@@ -1,0 +1,31 @@
+name: Create Documentation Page
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  document:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+
+      - name: Instalar dependências
+        run: bundle install
+
+      - name: Gerar documentação
+        run: |
+          yard doc
+          mkdir -p docs
+          mv -f doc/* docs/
+
+      - name: Deploy para GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
