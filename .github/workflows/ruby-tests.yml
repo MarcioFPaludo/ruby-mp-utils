@@ -2,6 +2,7 @@ name: Ruby Tests
 
 on:
   workflow_call:
+  workflow_dispatch:
   
 permissions:
   contents: read
@@ -15,9 +16,9 @@ jobs:
         ruby-version: ['2.6', '2.7', '3.0', '3.2']
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Ruby
-      uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true

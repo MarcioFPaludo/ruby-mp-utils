@@ -3,7 +3,9 @@ name: Release Gem
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - 'v*.*.*'        
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -12,27 +14,9 @@ permissions:
 jobs:
   tests:
     uses: ./.github/workflows/ruby-tests.yml
-  release:
+  publish:
     needs: tests
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '2.6'
-
-    - name: Install dependencies
-      run: bundle check || bundle install -j 20
-
-    - name: Build gem
-      run: gem build mp-utils.gemspec
-
-    - name: Publish gem
-      env:
-        GEM_HOST_API_KEY: ${{ secrets.GEM_HOST_API_KEY }}
-        GEM_HOST_OTP_CODE: ${{ secrets.GEM_HOST_OTP_CODE }}
-      run: gem push mp-utils-*.gem
+    uses: ./.github/workflows/publish-gem.yml
+  documentation:
+    needs: publish
+    uses: ./.github/workflows/create-doc-page.yml
