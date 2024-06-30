@@ -123,11 +123,18 @@ class Message
   end
 
   # Reads and returns the content of a message file located at a specific path.
+  # If the file name have the suffix ".aas.txt", the ANSIStyleManager will be applied to the file.
   #
   # @param path [String] The path where the message file is located.
   # @param file_name [String] The name of the file to be read.
   # @return [String, nil] The content of the message file, or nil if the file does not exist.
   def recover_content_with(path, file_name)
+    aas_file_path = File.join(path, "#{file_name}.aas.txt")
+    if File.exist?(aas_file_path)
+      content = File.read(aas_file_path)
+      return ANSIStyleManager.new(content).to_s
+    end
+
     file_path = File.join(path, "#{file_name}.txt")
     return nil unless File.exist?(file_path)
 

@@ -59,5 +59,17 @@ RSpec.describe Message do
       result = "Hellow World from MPUtils!\nWe hope you are well Alice!"
       expect(Message.new(message, replaces: replaces).to_s).to eq(result)
     end
+
+    it 'should apply ANSI Style in .aas.txt files content and replace keys with replaces values.' do
+      message = "<||teste_ansi||>\n<||hellow_world||>\nWe hope you are well <||username||>!\n<||teste_b_ansi||>"
+      replaces = { '<||username||>' => 'Alice' }
+
+      Resources.define(custom_path: Resources.library_path.gsub('lib', 'spec'))
+
+      result = "This \e[34mis \e[31ma colored\e[34m ansi test!\e[49;39m\n"
+      result += "Specs Hellow World!\nWe hope you are well Alice!\n"
+      result += "This \e[34mis \e[1mother \e[31mcolored\e[34m ansi test!\e[22m\e[49;39m"
+      expect(Message.new(message, replaces: replaces).to_s).to eq(result)
+    end
   end
 end
