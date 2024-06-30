@@ -1,45 +1,50 @@
 # frozen_string_literal: true
 
-require 'rake/clean'
-
-CLEAN.include %w[pkg coverage *.gem]
-
-require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
-
-RSpec::Core::RakeTask.new(:spec)
-
 require 'rubocop/rake_task'
+require 'bundler/gem_tasks'
+require 'rake/clean'
+require 'rake'
 
+require_relative 'lib/mp_utils'
+require_relative 'lib/version'
+
+CLEAN.include %w[pkg coverage *.gem doc .yardoc]
+RSpec::Core::RakeTask.new(:spec)
 RuboCop::RakeTask.new
 
 task default: %i[spec rubocop]
-
-require_relative 'lib/version'
-require 'rake'
 
 namespace :version do
   %i[major minor patch].each do |part|
     desc "Bump #{part} version"
     task part do
-      current_version = MPUtils::VERSION.split('.').map(&:to_i)
-      new_version = case part
-                    when :major
-                      [current_version[0] + 1, 0, 0]
-                    when :minor
-                      [current_version[0], current_version[1] + 1, 0]
-                    when :patch
-                      current_version[0..1] + [current_version[2] + 1]
-                    end.join('.')
-
+      version = VersionManager.new(MPUtils::VERSION)
       path = File.join('lib', 'version.rb')
+
+      case part
+      when :major
+        version.increment_major
+      when :minor
+        version.increment_minor
+      when :patch
+        version.increment_pathc
+      end
+
       content = File.read(path)
-      puts content
-      content.gsub!(/VERSION.+'\d+\.\d+\.\d+'/, "VERSION = '#{new_version}'")
-      puts content
+      content.gsub!(/VERSION.+'#{MPUtils::VERSION}'/, "VERSION = '#{version}'")
       File.open(path, 'w') { |file| file << content }
 
-      puts "Version bumped to #{new_version}"
+      system("echo \"::set-output name=new_version::#{version}\"")
     end
+  end
+end
+
+namespace :doc do
+  desc 'Bump  version'
+  task :test do
+    system('yard doc')
+    system('open "http://localhost:8808"')
+    system('yard server')
   end
 end

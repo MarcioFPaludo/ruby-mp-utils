@@ -1,0 +1,69 @@
+name: Bump Version
+
+on:
+  pull_request:
+    types: 
+      - closed
+
+jobs:
+  bump_version:
+    name: Build + Publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    if: >
+      github.event.pull_request.merged == true &&
+      contains(join(github.event.pull_request.labels.*.name, ','), 'version:major') ||
+      contains(join(github.event.pull_request.labels.*.name, ','), 'version:minor') ||
+      contains(join(github.event.pull_request.labels.*.name, ','), 'version:patch')
+    
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v4
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6.10
+
+    - name: Bump Version
+      id: bump_version
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        PR_NUMBER=$(jq --raw-output .number "$GITHUB_EVENT_PATH")
+        LABELS=$(curl -s \
+          -H "Authorization: token $GITHUB_TOKEN" \
+          -H "Accept: application/vnd.github+json" \
+          https://api.github.com/repos/${{ github.repository }}/issues/$PR_NUMBER/labels | jq -r '.[].name')
+        
+        echo "PR Labels: $LABELS"
+
+        for LABEL in $LABELS; do
+          case "$LABEL" in
+            "version:major")
+              rake version:major
+              ;;
+            "version:minor")
+              rake version:minor
+              ;;
+            "version:patch")
+              rake version:patch
+              ;;
+            *)
+              echo "No matching version bump task for label $LABEL"
+              ;;
+          esac
+        done
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add lib/version.rb
+        git commit -m "Bump version to ${{ steps.bump_version.outputs.new_version }}"
+        git push
+    - name: Create new tag
+      run: |
+        new_version=${{ steps.bump_version.outputs.new_version }}
+        git tag "v$new_version"
+        git push origin "v$new_version"
