@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require 'utils/key'
-require 'utils/array'
-require 'utils/message'
-require 'utils/question'
-require 'resources/path_helper'
+require_relative 'utils/key'
+require_relative 'utils/array'
+require_relative 'utils/message'
+require_relative 'utils/question'
+require_relative 'utils/version_manager'
+require_relative 'resources/path_helper'
