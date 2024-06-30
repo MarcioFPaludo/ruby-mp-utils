@@ -78,10 +78,42 @@ RSpec.describe ANSIStyleManager do
     end
   end
 
+  # rubocop:disable Layout/LineLength
   describe '#to_s' do
-    it 'converts the string with all tokens replaced by corresponding ANSI codes' do
-      manager = ANSIStyleManager.new('Hello <color:red>World</color>')
-      expect(manager.to_s).to eq("Hello \e[31mWorld\e[49;39m")
+    it 'Converts the string with all tokens replaced by corresponding ANSI codes' do
+      manager = ANSIStyleManager.new('<effect:italic><effect:bold> Hello </effect> <color:red>World</color></effect>')
+      expect(manager.to_s).to eq("\e[3m\e[1m Hello \e[22m \e[31mWorld\e[49;39m\e[23m")
+    end
+
+    it 'applies ANSI styles correctly for the first input' do
+      manager = ANSIStyleManager.new('Test <color:blue> color<color:200> <effect:bold>with another color </color> without </effect></color>background!')
+      expect(manager.to_s).to eq("Test \e[34m color\e[38;5;200m \e[1mwith another color \e[34m without \e[22m\e[49;39mbackground!")
+    end
+
+    it 'applies ANSI styles correctly for the second input' do
+      manager = ANSIStyleManager.new('Test <color:1;200;3> color<color:yellow> with another color </color> without </color>background!')
+      expect(manager.to_s).to eq("Test \e[38;2;1;200;3m color\e[33m with another color \e[38;2;1;200;3m without \e[49;39mbackground!")
+    end
+
+    it 'applies ANSI styles correctly for the third input' do
+      manager = ANSIStyleManager.new('Test <color:1;200;3> color<color:200> with another color </color> without </color>background!')
+      expect(manager.to_s).to eq("Test \e[38;2;1;200;3m color\e[38;5;200m with another color \e[38;2;1;200;3m without \e[49;39mbackground!")
+    end
+
+    it 'applies ANSI styles correctly for the fourth input' do
+      manager = ANSIStyleManager.new('Test <color:blue> color<color:200> with another color </color> without </color>background!')
+      expect(manager.to_s).to eq("Test \e[34m color\e[38;5;200m with another color \e[34m without \e[49;39mbackground!")
+    end
+
+    it 'applies ANSI styles correctly for the fifth input' do
+      manager = ANSIStyleManager.new('Test <color:1;200;3:white> color<color:200> with another color </color> with </color>background!')
+      expect(manager.to_s).to eq("Test \e[47;38;2;1;200;3m color\e[38;5;200m with another color \e[47;38;2;1;200;3m with \e[49;39mbackground!")
+    end
+
+    it 'applies ANSI styles correctly for the sixth input' do
+      manager = ANSIStyleManager.new('Test <color:2:white> color<color:5:10> <effect:bold>with another color </color> with </effect></color>background!')
+      expect(manager.to_s).to eq("Test \e[47;38;5;2m color\e[48;5;10;38;5;5m \e[1mwith another color \e[47;38;5;2m with \e[22m\e[49;39mbackground!")
     end
   end
+  # rubocop:enable Layout/LineLength
 end
