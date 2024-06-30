@@ -1,11 +1,9 @@
 name: Release Gem
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'        
-    branches:
-      - main
+  release:
+    types:
+      - created
 
 permissions:
   contents: read
@@ -14,9 +12,6 @@ permissions:
 jobs:
   tests:
     uses: ./.github/workflows/ruby-tests.yml
-  publish:
-    needs: tests
-    uses: ./.github/workflows/publish-gem.yml
   documentation:
-    needs: publish
+    needs: tests
     uses: ./.github/workflows/create-doc-page.yml

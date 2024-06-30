@@ -56,8 +56,8 @@ class Key
   def self.find_keys_in(value)
     ep = Regexp.escape(prefix)
     es = Regexp.escape(suffix)
-    value.to_s.scan(/#{ep}[^#{ep}#{es}]+#{es}/).map do |key|
-      Key.new(key.gsub(/(#{ep})|(#{es})/, ''))
+    value.to_s.scan(/#{ep}([^#{ep}#{es}]+)#{es}/).map do |key|
+      Key.new(key.first)
     end
   end
 
