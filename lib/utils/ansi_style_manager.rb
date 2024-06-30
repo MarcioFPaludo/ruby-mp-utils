@@ -94,10 +94,10 @@ class ANSIStyleManager
     digit_values = color.scan(CONSTANTS::ANSI::COLOR_DIGITS_REGEX).flatten.compact
 
     if [1, 3].include?(digit_values.count)
-      format = digit_values.count == 1 ? 5 : 2
-      type = is_background ? 48 : 38
+      format = "#{digit_values.count == 1 ? 'numeric' : 'rgb'}_format"
+      format = "#{is_background ? 'background_' : ''}#{format}"
 
-      return ANSI.new([type, format].concat(digit_values))
+      return ANSI.new([format, digit_values])
     elsif color.match?(/^reset$/)
       return ANSI.new(is_background ? :reset_background : :reset_color)
     end

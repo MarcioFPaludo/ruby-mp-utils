@@ -49,6 +49,8 @@ class ANSI
     cyan: 36,
     white: 37,
     reset_color: 39,
+    rgb_format: [38, 2],
+    numeric_format: [38, 5],
 
     # Background Colors
     background_black: 40,
@@ -59,6 +61,8 @@ class ANSI
     background_magenta: 45,
     background_cyan: 46,
     background_white: 47,
+    background_rgb_format: [48, 2],
+    background_numeric_format: [48, 5],
     reset_background: 49
   }.freeze
 
@@ -101,7 +105,7 @@ class ANSI
   #
   # @return [String] The formatted string with the ANSI codes.
   def to_s
-    "\e[#{@codes.map(&:to_s).join(';')}m"
+    "\e[#{@codes.flatten.join(';')}m"
   end
 
   # Normalizes an array of codes, converting symbols and strings to their respective ANSI codes.
@@ -110,6 +114,7 @@ class ANSI
   # @return [Array<Integer>] The normalized array of ANSI codes.
   def self.normalize_array_codes(array)
     array.map do |value|
+      next normalize_array_codes(value) if value.is_a?(Array)
       next value if value.is_a?(Integer)
       next CODES_HASH[value] if value.is_a?(Symbol)
       next value.to_i if value.match?(CONSTANTS::ONLY_DIGITS_REGEX)
