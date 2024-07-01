@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: ANSI
+  
+    &mdash; Documentation by YARD 0.9.36
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "ANSI";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (A)</a> &raquo;
+    
+    
+    <span class="title">ANSI</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: ANSI
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ANSI</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/utils/ansi.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The ANSI class is responsible for generating ANSI codes for text styling in terminals. It allows the combination of multiple style and color codes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_ansi'>ansi</span> <span class='op'>=</span> <span class='const'>ANSI</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSI#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='symbol'>:bold</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_ansi'>ansi</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># =&gt; &quot;\e[1m&quot;</span></code></pre>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_ansi'>ansi</span> <span class='op'>=</span> <span class='const'>ANSI</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSI#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='symbol'>:bold</span><span class='comma'>,</span> <span class='symbol'>:red</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_ansi'>ansi</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># =&gt; &quot;\e[1;31m&quot;</span></code></pre>
+    
+  </div>
+
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="CODES_HASH-constant" class="">CODES_HASH =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Hash that maps style and color names to their respective ANSI codes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='label'>reset_all:</span> <span class='int'>0</span><span class='comma'>,</span>
+
+  <span class='comment'># Effects
+</span>  <span class='label'>bold:</span> <span class='int'>1</span><span class='comma'>,</span>
+  <span class='label'>faint:</span> <span class='int'>2</span><span class='comma'>,</span>
+  <span class='label'>italic:</span> <span class='int'>3</span><span class='comma'>,</span>
+  <span class='label'>underlined:</span> <span class='int'>4</span><span class='comma'>,</span>
+  <span class='label'>blinking:</span> <span class='int'>5</span><span class='comma'>,</span>
+  <span class='label'>inverse:</span> <span class='int'>7</span><span class='comma'>,</span>
+  <span class='label'>hidden:</span> <span class='int'>8</span><span class='comma'>,</span>
+  <span class='label'>strike:</span> <span class='int'>9</span><span class='comma'>,</span>
+  <span class='label'>plain:</span> <span class='int'>21</span><span class='comma'>,</span>
+
+  <span class='comment'># Remove Effects
+</span>  <span class='label'>remove_bold:</span> <span class='int'>22</span><span class='comma'>,</span>
+  <span class='label'>remove_faint:</span> <span class='int'>22</span><span class='comma'>,</span>
+  <span class='label'>remove_italic:</span> <span class='int'>23</span><span class='comma'>,</span>
+  <span class='label'>remove_underlined:</span> <span class='int'>24</span><span class='comma'>,</span>
+  <span class='label'>remove_blinking:</span> <span class='int'>25</span><span class='comma'>,</span>
+  <span class='label'>remove_inverse:</span> <span class='int'>27</span><span class='comma'>,</span>
+  <span class='label'>remove_hidden:</span> <span class='int'>28</span><span class='comma'>,</span>
+  <span class='label'>remove_strike:</span> <span class='int'>29</span><span class='comma'>,</span>
+  <span class='label'>remove_plain:</span> <span class='int'>24</span><span class='comma'>,</span>
+
+  <span class='comment'># Colors
+</span>  <span class='label'>black:</span> <span class='int'>30</span><span class='comma'>,</span>
+  <span class='label'>red:</span> <span class='int'>31</span><span class='comma'>,</span>
+  <span class='label'>green:</span> <span class='int'>32</span><span class='comma'>,</span>
+  <span class='label'>yellow:</span> <span class='int'>33</span><span class='comma'>,</span>
+  <span class='label'>blue:</span> <span class='int'>34</span><span class='comma'>,</span>
+  <span class='label'>magenta:</span> <span class='int'>35</span><span class='comma'>,</span>
+  <span class='label'>cyan:</span> <span class='int'>36</span><span class='comma'>,</span>
+  <span class='label'>white:</span> <span class='int'>37</span><span class='comma'>,</span>
+  <span class='label'>reset_color:</span> <span class='int'>39</span><span class='comma'>,</span>
+  <span class='label'>rgb_format:</span> <span class='lbracket'>[</span><span class='int'>38</span><span class='comma'>,</span> <span class='int'>2</span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='label'>numeric_format:</span> <span class='lbracket'>[</span><span class='int'>38</span><span class='comma'>,</span> <span class='int'>5</span><span class='rbracket'>]</span><span class='comma'>,</span>
+
+  <span class='comment'># Background Colors
+</span>  <span class='label'>background_black:</span> <span class='int'>40</span><span class='comma'>,</span>
+  <span class='label'>background_red:</span> <span class='int'>41</span><span class='comma'>,</span>
+  <span class='label'>background_green:</span> <span class='int'>42</span><span class='comma'>,</span>
+  <span class='label'>background_yellow:</span> <span class='int'>43</span><span class='comma'>,</span>
+  <span class='label'>background_blue:</span> <span class='int'>44</span><span class='comma'>,</span>
+  <span class='label'>background_magenta:</span> <span class='int'>45</span><span class='comma'>,</span>
+  <span class='label'>background_cyan:</span> <span class='int'>46</span><span class='comma'>,</span>
+  <span class='label'>background_white:</span> <span class='int'>47</span><span class='comma'>,</span>
+  <span class='label'>background_rgb_format:</span> <span class='lbracket'>[</span><span class='int'>48</span><span class='comma'>,</span> <span class='int'>2</span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='label'>background_numeric_format:</span> <span class='lbracket'>[</span><span class='int'>48</span><span class='comma'>,</span> <span class='int'>5</span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='label'>reset_background:</span> <span class='int'>49</span>
+<span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#codes-instance_method" title="#codes (instance method)">#<strong>codes</strong>  &#x21d2; Array&lt;Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The ANSI codes stored in the instance.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#normalize_array_codes-class_method" title="normalize_array_codes (class method)">.<strong>normalize_array_codes</strong>(array)  &#x21d2; Array&lt;Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Normalizes an array of codes, converting symbols and strings to their respective ANSI codes.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append-instance_method" title="#append (instance method)">#<strong>append</strong>(ansi)  &#x21d2; ANSI </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds ANSI codes from another instance of the ANSI class.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append!-instance_method" title="#append! (instance method)">#<strong>append!</strong>(ansi)  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds ANSI codes from another instance of the ANSI class and updates the current instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(code)  &#x21d2; ANSI </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Initializes a new instance of the ANSI class.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_s-instance_method" title="#to_s (instance method)">#<strong>to_s</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Converts the ANSI codes stored in the instance to a formatted string.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(code)  &#x21d2; <tt><span class='object_link'><a href="" title="ANSI (class)">ANSI</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Initializes a new instance of the ANSI class.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>code</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Array.html" title="Array (class)">Array</a></span>&lt;Symbol&gt;</tt>, <tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>One or more ANSI codes represented as symbols, integers, or strings.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+75
+76
+77
+78
+79
+80
+81
+82
+83</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/utils/ansi.rb', line 75</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_code'>code</span><span class='rparen'>)</span>
+  <span class='ivar'>@codes</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_code'>code</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Array.html" title="Array (class)">Array</a></span></span><span class='rparen'>)</span>
+             <span class='const'><span class='object_link'><a href="" title="ANSI (class)">ANSI</a></span></span><span class='period'>.</span><span class='id identifier rubyid_normalize_array_codes'><span class='object_link'><a href="#normalize_array_codes-class_method" title="ANSI.normalize_array_codes (method)">normalize_array_codes</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_code'>code</span><span class='rparen'>)</span>
+           <span class='kw'>elsif</span> <span class='id identifier rubyid_code'>code</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Symbol</span><span class='rparen'>)</span>
+             <span class='lbracket'>[</span><span class='const'><span class='object_link'><a href="#CODES_HASH-constant" title="ANSI::CODES_HASH (constant)">CODES_HASH</a></span></span><span class='lbracket'>[</span><span class='id identifier rubyid_code'>code</span><span class='rbracket'>]</span><span class='rbracket'>]</span>
+           <span class='kw'>else</span>
+             <span class='const'><span class='object_link'><a href="" title="ANSI (class)">ANSI</a></span></span><span class='period'>.</span><span class='id identifier rubyid_normalize_array_codes'><span class='object_link'><a href="#normalize_array_codes-class_method" title="ANSI.normalize_array_codes (method)">normalize_array_codes</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_code'>code</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+           <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="codes-instance_method">
+  
+    #<strong>codes</strong>  &#x21d2; <tt><span class='object_link'><a href="Array.html" title="Array (class)">Array</a></span>&lt;Integer&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the ANSI codes stored in the instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Array.html" title="Array (class)">Array</a></span>&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the ANSI codes stored in the instance.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+70
+71
+72</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/utils/ansi.rb', line 70</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_codes'>codes</span>
+  <span class='ivar'>@codes</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="normalize_array_codes-class_method">
+  
+    .<strong>normalize_array_codes</strong>(array)  &#x21d2; <tt><span class='object_link'><a href="Array.html" title="Array (class)">Array</a></span>&lt;Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Normalizes an array of codes, converting symbols and strings to their respective ANSI codes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Array.html" title="Array (class)">Array</a></span>&lt;Symbol, String, Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An array of codes to be normalized.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Array.html" title="Array (class)">Array</a></span>&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The normalized array of ANSI codes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/utils/ansi.rb', line 115</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_normalize_array_codes'>normalize_array_codes</span><span class='lparen'>(</span><span class='id identifier rubyid_array'>array</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_array'>array</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
+    <span class='kw'>next</span> <span class='id identifier rubyid_normalize_array_codes'>normalize_array_codes</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Array.html" title="Array (class)">Array</a></span></span><span class='rparen'>)</span>
+    <span class='kw'>next</span> <span class='id identifier rubyid_value'>value</span> <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Integer</span><span class='rparen'>)</span>
+    <span class='kw'>next</span> <span class='const'><span class='object_link'><a href="#CODES_HASH-constant" title="ANSI::CODES_HASH (constant)">CODES_HASH</a></span></span><span class='lbracket'>[</span><span class='id identifier rubyid_value'>value</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Symbol</span><span class='rparen'>)</span>
+    <span class='kw'>next</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='const'>CONSTANTS</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="CONSTANTS.html#ONLY_DIGITS_REGEX-constant" title="CONSTANTS::ONLY_DIGITS_REGEX (constant)">ONLY_DIGITS_REGEX</a></span></span><span class='rparen'>)</span>
+
+    <span class='const'><span class='object_link'><a href="#CODES_HASH-constant" title="ANSI::CODES_HASH (constant)">CODES_HASH</a></span></span><span class='lbracket'>[</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="append-instance_method">
+  
+    #<strong>append</strong>(ansi)  &#x21d2; <tt><span class='object_link'><a href="" title="ANSI (class)">ANSI</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds ANSI codes from another instance of the ANSI class.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ansi</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ANSI (class)">ANSI</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The instance of the ANSI class whose codes will be added.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ANSI (class)">ANSI</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A new instance of the ANSI class with the combined codes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RuntimeError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>If the argument is not an instance of the ANSI class.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+90
+91
+92
+93
+94</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/utils/ansi.rb', line 90</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_append'>append</span><span class='lparen'>(</span><span class='id identifier rubyid_ansi'>ansi</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Needs be an instance of ANSI</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_ansi'>ansi</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="" title="ANSI (class)">ANSI</a></span></span><span class='rparen'>)</span>
+
+  <span class='const'><span class='object_link'><a href="" title="ANSI (class)">ANSI</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSI#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='ivar'>@codes</span><span class='period'>.</span><span class='id identifier rubyid_union'>union</span><span class='lparen'>(</span><span class='id identifier rubyid_ansi'>ansi</span><span class='period'>.</span><span class='id identifier rubyid_codes'>codes</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append!-instance_method">
+  
+    #<strong>append!</strong>(ansi)  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Adds ANSI codes from another instance of the ANSI class and updates the current instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ansi</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ANSI (class)">ANSI</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The instance of the ANSI class whose codes will be added.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+100
+101
+102</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/utils/ansi.rb', line 100</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_append!'>append!</span><span class='lparen'>(</span><span class='id identifier rubyid_ansi'>ansi</span><span class='rparen'>)</span>
+  <span class='ivar'>@codes</span> <span class='op'>=</span> <span class='id identifier rubyid_append'>append</span><span class='lparen'>(</span><span class='id identifier rubyid_ansi'>ansi</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_codes'>codes</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_s-instance_method">
+  
+    #<strong>to_s</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Converts the ANSI codes stored in the instance to a formatted string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The formatted string with the ANSI codes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/utils/ansi.rb', line 107</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\e[</span><span class='embexpr_beg'>#{</span><span class='ivar'>@codes</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>m</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Mon Jul  1 13:49:59 2024 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.36 (ruby-2.6.10).
+</div>
+
+    </div>
+  </body>
+</html>
