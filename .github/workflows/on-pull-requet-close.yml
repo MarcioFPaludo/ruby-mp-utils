@@ -1,0 +1,36 @@
+name: Run On Pull Request Closed
+
+on:
+  pull_request:
+    types: 
+      - closed
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  bump_major:
+    if: >
+      github.event.pull_request.merged == true &&
+      contains(join(github.event.pull_request.labels.*.name, ','), 'version:major')
+    secrets: inherit
+    uses: ./.github/workflows/bump-version.yml
+    with:
+      version: major
+  bump_minor:
+    if: >
+      github.event.pull_request.merged == true &&
+      contains(join(github.event.pull_request.labels.*.name, ','), 'version:minor')
+    secrets: inherit
+    uses: ./.github/workflows/bump-version.yml
+    with:
+      version: minor
+  bump_patch:
+    if: >
+      github.event.pull_request.merged == true &&
+      contains(join(github.event.pull_request.labels.*.name, ','), 'version:patch')
+    secrets: inherit
+    uses: ./.github/workflows/bump-version.yml
+    with:
+      version: patch

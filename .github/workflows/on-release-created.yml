@@ -1,4 +1,4 @@
-name: Release Gem
+name: Run On Release Created
 
 on:
   release:

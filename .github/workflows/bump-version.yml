@@ -1,0 +1,54 @@
+name: Bump Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Define the version number to bump'
+        required: true
+        default: patch
+        type: choice
+        options:
+        - major
+        - minor
+        - patch
+  workflow_call:
+    inputs:
+      version:
+        description: 'Define the version number to bump'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  bump_version:
+    name: Build + Publish
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6.10
+
+    - name: Bump Version
+      id: bump_version
+      run: |
+        rake version:${{ github.event.inputs.version }}
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add lib/version.rb
+        git commit -m "Bump version to ${{ steps.bump_version.outputs.new_version }}"
+        git push
+    - name: Create new tag
+      run: |
+        new_version=${{ steps.bump_version.outputs.new_version }}
+        git tag "v$new_version"
+        git push origin "v$new_version"
