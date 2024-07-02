@@ -29,7 +29,7 @@ namespace :version do
       when :minor
         version.increment_minor
       when :patch
-        version.increment_pathc
+        version.increment_patch
       end
 
       content = File.read(path)
