@@ -39,7 +39,8 @@ require_relative 'ansi'
 # ## Colors
 # The ANSIStyleManager supports 3 types of coloring: Named Colors, RGB Colors, or 256 Colors.
 #
-# The foreground color can be changed by adding `<color:color_type>` at the beginning and `</color>` at the end of the character sequence you want to color.
+# The foreground color can be changed by adding `<color:color_type>` at the beginning and `</color>`
+# at the end of the character sequence you want to color.
 #
 # Example:
 # ```ruby
@@ -54,7 +55,8 @@ require_relative 'ansi'
 #
 # It is also possible to set the background color of a text.
 #
-# The background color can be changed by adding `<color:color_type:color_type>` at the beginning and `</color>` at the end of the character sequence you want to color.
+# The background color can be changed by adding `<color:color_type:color_type>` at the
+# beginning and `</color>` at the end of the character sequence you want to color.
 #
 # Example:
 # ```ruby
