@@ -36,10 +36,14 @@ jobs:
       with:
         ruby-version: 2.6.10
 
+    - name: Bundle Install
+      run: bundle check || bundle install -j 20
+    
     - name: Bump Version
       id: bump_version
       run: |
         rake version:${{ inputs.bump_version }}
+
     - name: Commit and push changes
       run: |
         git config --global user.name 'github-actions[bot]'
@@ -47,6 +51,7 @@ jobs:
         git add lib/version.rb
         git commit -m "Bump version to ${{ steps.bump_version.outputs.new_version }}"
         git push
+
     - name: Create new tag
       run: |
         new_version=${{ steps.bump_version.outputs.new_version }}
