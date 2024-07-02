@@ -4,6 +4,7 @@ require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
 require 'bundler/gem_tasks'
 require 'rake/clean'
+require 'fileutils'
 require 'rake'
 
 require_relative 'lib/mp_utils'
@@ -41,10 +42,21 @@ namespace :version do
 end
 
 namespace :doc do
-  desc 'Bump  version'
-  task :test do
+  desc 'Generate all needed documentation'
+  task :generate do
     system('yard doc')
+    source_dir = '.resources/images'
+    destination_dir = 'doc/.resources/images'
+    FileUtils.mkdir_p(destination_dir)
+    Dir.glob("#{source_dir}/*.{png,jpg,jpeg,gif}").each do |image|
+      FileUtils.cp(image, destination_dir)
+    end
+  end
+
+  desc 'Generates the doc and make a local server for test the documentation'
+  task :test do
+    system('rake doc:generate')
     system('open "http://localhost:8808"')
-    system('yard server')
+    system('yard server --reload')
   end
 end

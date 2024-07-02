@@ -4,11 +4,15 @@ require_relative File.join('..', 'resources', 'path_helper')
 require_relative 'key'
 
 # The Message class represents a mechanism for dynamically handling and formatting messages.
+#
 # It supports the substitution of placeholders within a message template with actual data.
-# The class leverages file-based message templates, allowing for easy localization or customization
-# of messages. It integrates seamlessly with the Resources module to access these templates from
-# a customizable path set via the "SCRIPT_CUSTOM_RESOURCES" environment variable or from a default
-# library path.
+#
+# The class leverages file-based message templates, allowing for easy localization or
+# customization of messages.
+#
+# It integrates seamlessly with the Resources module to access these templates from
+# a customizable path set via the "SCRIPT_CUSTOM_RESOURCES" environment variable or
+# from a default library path.
 #
 # @example Creating a new Message instance and formatting it
 #   # Assuming "hellow_world" is a file that says "Hello, world!"
@@ -46,10 +50,7 @@ class Message
     new_message = replace_message_keys(String.new(@message))
     replace_all_to_replace_elements(new_message)
   end
-end
 
-# Private Methods
-class Message
   private
 
   # Determines the custom path for message files, if set through the "SCRIPT_CUSTOM_RESOURCES" environment variable.

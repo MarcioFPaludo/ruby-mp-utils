@@ -11,7 +11,9 @@ permissions:
 
 jobs:
   tests:
+    secrets: inherit
     uses: ./.github/workflows/ruby-tests.yml
   documentation:
     needs: tests
+    secrets: inherit
     uses: ./.github/workflows/create-doc-page.yml

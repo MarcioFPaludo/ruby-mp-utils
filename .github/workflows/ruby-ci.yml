@@ -7,4 +7,5 @@ on:
 
 jobs:
   tests:
+    secrets: inherit 
     uses: ./.github/workflows/ruby-tests.yml

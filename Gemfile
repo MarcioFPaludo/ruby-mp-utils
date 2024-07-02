@@ -13,6 +13,7 @@ end
 
 group :development do
   gem 'rake'
+  gem 'redcarpet'
   gem 'rubocop'
   gem 'solargraph'
   gem 'yard'

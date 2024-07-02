@@ -45,10 +45,7 @@ class Key
   def to_regexp
     /#{Regexp.escape(to_s)}/
   end
-end
 
-# Static Methods
-class Key
   # Finds and returns all Key instances within the given string.
   #
   # @param value [#to_s] the string to search for keys.

@@ -5,13 +5,14 @@ on:
     types: 
       - closed
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   bump_version:
     name: Build + Publish
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     if: >
       github.event.pull_request.merged == true &&
       contains(join(github.event.pull_request.labels.*.name, ','), 'version:major') ||
