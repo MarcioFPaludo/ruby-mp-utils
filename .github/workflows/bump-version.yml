@@ -3,7 +3,7 @@ name: Bump Version
 on:
   workflow_dispatch:
     inputs:
-      version:
+      bump_version:
         description: 'Define the version number to bump'
         required: true
         default: patch
@@ -14,7 +14,7 @@ on:
         - patch
   workflow_call:
     inputs:
-      version:
+      bump_version:
         description: 'Define the version number to bump'
         required: true
         type: string
@@ -39,7 +39,7 @@ jobs:
     - name: Bump Version
       id: bump_version
       run: |
-        rake version:${{ github.event.inputs.version }}
+        rake version:${{ inputs.bump_version }}
     - name: Commit and push changes
       run: |
         git config --global user.name 'github-actions[bot]'
