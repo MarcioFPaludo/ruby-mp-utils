@@ -6,7 +6,7 @@
 <title>
   Class: Key
   
-    &mdash; Documentation by YARD 0.9.36
+    &mdash; MPUtils Documentation
   
 </title>
 
@@ -94,23 +94,42 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/utils/key.rb<span class="defines">,<br />
-  lib/utils/key.rb</span>
-</dd>
+    <dd>lib/utils/key.rb</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Static Methods</p>
+    <p>The Key class is designed to encapsulate strings within a specific prefix and suffix,
+allowing for easy identification and manipulation of placeholders within messages.
+This can be particularly useful in templating systems where placeholders need
+to be dynamically replaced with actual content.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Creating a new Key and converting it to a string</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='const'>Key</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Key#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>username</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># =&gt; &quot;&lt;||username||&gt;&quot;</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Finding keys within a string</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_keys'>keys</span> <span class='op'>=</span> <span class='const'>Key</span><span class='period'>.</span><span class='id identifier rubyid_find_keys_in'><span class='object_link'><a href="#find_keys_in-class_method" title="Key.find_keys_in (method)">find_keys_in</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello, &lt;||username||&gt;! Your code is &lt;||code||&gt;.</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_s</span><span class='rparen'>)</span> <span class='comment'># =&gt; [&quot;&lt;||username||&gt;&quot;, &quot;&lt;||code||&gt;&quot;]</span></code></pre>
+    
+  </div>
+
 
 </div>
 
@@ -141,8 +160,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute value.</p>
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute value.</p>
 </div></span>
   
 </li>
@@ -178,8 +196,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Finds and returns all Key instances within the given string.</p>
+    <span class="summary_desc"><div class='inline'><p>Finds and returns all Key instances within the given string.</p>
 </div></span>
   
 </li>
@@ -202,8 +219,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the prefix used to identify the start of a Key in a string.</p>
+    <span class="summary_desc"><div class='inline'><p>Returns the prefix used to identify the start of a Key in a string.</p>
 </div></span>
   
 </li>
@@ -226,8 +242,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the suffix used to identify the end of a Key in a string.</p>
+    <span class="summary_desc"><div class='inline'><p>Returns the suffix used to identify the end of a Key in a string.</p>
 </div></span>
   
 </li>
@@ -259,8 +274,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Checks equality of two Key objects based on their value.</p>
+    <span class="summary_desc"><div class='inline'><p>Checks equality of two Key objects based on their value.</p>
 </div></span>
   
 </li>
@@ -285,8 +299,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Initializes a new Key with the given value.</p>
+    <span class="summary_desc"><div class='inline'><p>Initializes a new Key with the given value.</p>
 </div></span>
   
 </li>
@@ -309,8 +322,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the escaped Regexp representation of the Key.to_s return.</p>
+    <span class="summary_desc"><div class='inline'><p>Returns the escaped Regexp representation of the Key.to_s return.</p>
 </div></span>
   
 </li>
@@ -333,8 +345,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the string representation of the Key, including its prefix and suffix.</p>
+    <span class="summary_desc"><div class='inline'><p>Returns the string representation of the Key, including its prefix and suffix.</p>
 </div></span>
   
 </li>
@@ -357,8 +368,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Initializes a new Key with the given value.</p>
+    <p>Initializes a new Key with the given value.</p>
 
 
   </div>
@@ -377,8 +387,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the value to be encapsulated by the Key.</p>
+        <div class='inline'><p>the value to be encapsulated by the Key.</p>
 </div>
       
     </li>
@@ -425,8 +434,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns the value of attribute value.</p>
+    <p>Returns the value of attribute value.</p>
 
 
   </div>
@@ -473,8 +481,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Finds and returns all Key instances within the given string.</p>
+    <p>Finds and returns all Key instances within the given string.</p>
 
 
   </div>
@@ -493,8 +500,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the string to search for keys.</p>
+        <div class='inline'><p>the string to search for keys.</p>
 </div>
       
     </li>
@@ -512,8 +518,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>an array of Key instances found within the given string.</p>
+        <div class='inline'><p>an array of Key instances found within the given string.</p>
 </div>
       
     </li>
@@ -526,16 +531,16 @@
       <pre class="lines">
 
 
+53
+54
+55
 56
 57
 58
-59
-60
-61
-62</pre>
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/utils/key.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/utils/key.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_find_keys_in'>find_keys_in</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_ep'>ep</span> <span class='op'>=</span> <span class='const'>Regexp</span><span class='period'>.</span><span class='id identifier rubyid_escape'>escape</span><span class='lparen'>(</span><span class='id identifier rubyid_prefix'>prefix</span><span class='rparen'>)</span>
@@ -560,8 +565,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns the prefix used to identify the start of a Key in a string.</p>
+    <p>Returns the prefix used to identify the start of a Key in a string.</p>
 
 
   </div>
@@ -579,8 +583,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the prefix.</p>
+        <div class='inline'><p>the prefix.</p>
 </div>
       
     </li>
@@ -593,12 +596,12 @@
       <pre class="lines">
 
 
-67
-68
-69</pre>
+64
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/utils/key.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'lib/utils/key.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_prefix'>prefix</span>
   <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;||</span><span class='tstring_end'>&#39;</span></span>
@@ -619,8 +622,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns the suffix used to identify the end of a Key in a string.</p>
+    <p>Returns the suffix used to identify the end of a Key in a string.</p>
 
 
   </div>
@@ -638,8 +640,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the suffix.</p>
+        <div class='inline'><p>the suffix.</p>
 </div>
       
     </li>
@@ -652,12 +653,12 @@
       <pre class="lines">
 
 
-74
-75
-76</pre>
+71
+72
+73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/utils/key.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/utils/key.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_suffix'>suffix</span>
   <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>||&gt;</span><span class='tstring_end'>&#39;</span></span>
@@ -684,8 +685,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Checks equality of two Key objects based on their value.</p>
+    <p>Checks equality of two Key objects based on their value.</p>
 
 
   </div>
@@ -704,8 +704,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the other Key object to compare with.</p>
+        <div class='inline'><p>the other Key object to compare with.</p>
 </div>
       
     </li>
@@ -723,8 +722,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>true if both Keys have the same value, false otherwise.</p>
+        <div class='inline'><p>true if both Keys have the same value, false otherwise.</p>
 </div>
       
     </li>
@@ -763,8 +761,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns the escaped Regexp representation of the Key.to_s return.</p>
+    <p>Returns the escaped Regexp representation of the Key.to_s return.</p>
 
 
   </div>
@@ -782,8 +779,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the escaped regexp representation of the Key.to_s return.</p>
+        <div class='inline'><p>the escaped regexp representation of the Key.to_s return.</p>
 </div>
       
     </li>
@@ -822,8 +818,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns the string representation of the Key, including its prefix and suffix.</p>
+    <p>Returns the string representation of the Key, including its prefix and suffix.</p>
 
 
   </div>
@@ -841,8 +836,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the string representation of the Key.</p>
+        <div class='inline'><p>the string representation of the Key.</p>
 </div>
       
     </li>
@@ -875,7 +869,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jul  1 13:49:59 2024 by
+  Generated on Tue Jul  2 23:11:20 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-2.6.10).
 </div>

@@ -6,7 +6,7 @@
 <title>
   Class: ANSIStyleManager
   
-    &mdash; Documentation by YARD 0.9.36
+    &mdash; MPUtils Documentation
   
 </title>
 
@@ -101,23 +101,147 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>The ANSIStyleManager class is responsible for managing and applying ANSI styles to a given string. It can replace tokens in the string with corresponding ANSI codes for colors and effects.</p>
+    <p>The ANSIStyleManager class is responsible for managing and applying ANSI styles to a given string.</p>
+
+<p>It can replace tokens in the string with corresponding ANSI codes for colors, backgrounds and effects.</p>
+
+<h2 id="effects">Effects</h2>
+
+<p>Effects can be used by adding <code>&lt;effect:effect_name&gt;</code> at the beginning and <code>&lt;/effect&gt;</code> at the end of
+the sequence of characters to which you want the effect to be applied.</p>
+
+<p>Example:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_manager'>manager</span> <span class='op'>=</span> <span class='const'>ANSIStyleManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSIStyleManager#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>The text &lt;effect:bold&gt;Potato&lt;/effect&gt; will be bold.</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_manager'>manager</span>
+</code></pre>
+
+<p>Output:</p>
+
+<p><img src="./.resources/images/bold_effect_example.png" alt="bold output"></p>
+
+<p>Below is the table with all available effects:</p>
+
+<table><thead>
+<tr>
+<th>Effect Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bold</td>
+<td>set bold mode.</td>
+</tr>
+<tr>
+<td>faint</td>
+<td>set dim/faint mode.</td>
+</tr>
+<tr>
+<td>italic</td>
+<td>set italic mode.</td>
+</tr>
+<tr>
+<td>underline</td>
+<td>set underline mode.</td>
+</tr>
+<tr>
+<td>blinking</td>
+<td>set blinking mode.</td>
+</tr>
+<tr>
+<td>inverse</td>
+<td>set inverse/reverse mode.</td>
+</tr>
+<tr>
+<td>hidden</td>
+<td>set hidden/invisible mode.</td>
+</tr>
+<tr>
+<td>strike</td>
+<td>set strikethrough mode.</td>
+</tr>
+<tr>
+<td>plain</td>
+<td>set double underline mode.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Note:</strong> Some terminals may not support some of the effects listed above.</p>
+</blockquote>
+
+<h2 id="colors">Colors</h2>
+
+<p>The ANSIStyleManager supports 3 types of coloring: Named Colors, RGB Colors, or 256 Colors.</p>
+
+<p>The foreground color can be changed by adding <code>&lt;color:color_type&gt;</code> at the beginning and <code>&lt;/color&gt;</code>
+at the end of the character sequence you want to color.</p>
+
+<p>Example:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_text'>text</span>  <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>A &lt;color:green&gt;colorful &lt;color:red&gt;world &lt;color:yellow&gt;is &lt;color:blue&gt;much </span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_text'>text</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;/color&gt;more &lt;/color&gt;beautiful&lt;/color&gt;!&lt;/color&gt; ;)</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_manager'>manager</span> <span class='op'>=</span> <span class='const'>ANSIStyleManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSIStyleManager#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_manager'>manager</span>
+</code></pre>
+
+<p>Output:</p>
+
+<p><img src="./.resources/images/foreground_colored_example.png" alt="colored output"></p>
+
+<p>It is also possible to set the background color of a text.</p>
+
+<p>The background color can be changed by adding <code>&lt;color:color_type:color_type&gt;</code> at the
+beginning and <code>&lt;/color&gt;</code> at the end of the character sequence you want to color.</p>
+
+<p>Example:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_text'>text</span>  <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>A &lt;color:green:white&gt;colorful &lt;color:196&gt;world &lt;color:yellow:111&gt;is &lt;color:blue:255;255;255&gt;much </span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_text'>text</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;/color&gt;more &lt;/color&gt;beautiful&lt;/color&gt;!&lt;/color&gt; ;)</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_manager'>manager</span> <span class='op'>=</span> <span class='const'>ANSIStyleManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSIStyleManager#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_manager'>manager</span>
+</code></pre>
+
+<p>Output:</p>
+
+<p><img src="./.resources/images/background_colored_exemple.png" alt="colored output"></p>
+
+<p>Below is the table with all available color type patterns:</p>
+
+<table><thead>
+<tr>
+<th>Color Type</th>
+<th>Pattern</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Reset colors</td>
+<td>reset</td>
+<td>Resets to the terminal&#39;s default color.</td>
+</tr>
+<tr>
+<td>256 Colors</td>
+<td>number</td>
+<td>Accepts numbers between 0 and 255.</td>
+</tr>
+<tr>
+<td>RGB Colors</td>
+<td>R;G;B</td>
+<td>R, G, and B accept values between 0 and 255.</td>
+</tr>
+<tr>
+<td>Named Colors</td>
+<td>name</td>
+<td>Accepts the following color names: black, red, green, yellow, blue, magenta, cyan and white.</td>
+</tr>
+</tbody></table>
 
 
   </div>
 </div>
 <div class="tags">
   
-  <div class="examples">
-    <p class="tag_title">Examples:</p>
-    
-      
-      <pre class="example code"><code><span class='id identifier rubyid_manager'>manager</span> <span class='op'>=</span> <span class='const'>ANSIStyleManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSIStyleManager#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello &lt;color:red&gt;World&lt;/color&gt;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_manager'>manager</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># =&gt; &quot;Hello \e[31mWorld\e[39m&quot;</span></code></pre>
-    
-  </div>
-
 
 </div>
 
@@ -148,8 +272,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The string to which ANSI styles will be applied.</p>
+    <span class="summary_desc"><div class='inline'><p>The string to which ANSI styles will be applied.</p>
 </div></span>
   
 </li>
@@ -187,8 +310,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Initializes a new instance of the ANSIStyleManager class.</p>
+    <span class="summary_desc"><div class='inline'><p>Initializes a new instance of the ANSIStyleManager class.</p>
 </div></span>
   
 </li>
@@ -211,8 +333,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Replaces all color and effect tokens in the string with corresponding ANSI codes.</p>
+    <span class="summary_desc"><div class='inline'><p>Replaces all color and effect tokens in the string with corresponding ANSI codes.</p>
 </div></span>
   
 </li>
@@ -235,8 +356,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Replaces all color tokens in the string with corresponding ANSI codes.</p>
+    <span class="summary_desc"><div class='inline'><p>Replaces all color tokens in the string with corresponding ANSI codes.</p>
 </div></span>
   
 </li>
@@ -259,8 +379,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Replaces all effect tokens in the string with corresponding ANSI codes.</p>
+    <span class="summary_desc"><div class='inline'><p>Replaces all effect tokens in the string with corresponding ANSI codes.</p>
 </div></span>
   
 </li>
@@ -283,8 +402,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Converts the string with all tokens replaced by corresponding ANSI codes.</p>
+    <span class="summary_desc"><div class='inline'><p>Converts the string with all tokens replaced by corresponding ANSI codes.</p>
 </div></span>
   
 </li>
@@ -307,8 +425,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Initializes a new instance of the ANSIStyleManager class.</p>
+    <p>Initializes a new instance of the ANSIStyleManager class.</p>
 
 
   </div>
@@ -327,8 +444,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The string to which ANSI styles will be applied.</p>
+        <div class='inline'><p>The string to which ANSI styles will be applied.</p>
 </div>
       
     </li>
@@ -346,8 +462,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>If the argument is not a string.</p>
+        <div class='inline'><p>If the argument is not a string.</p>
 </div>
       
     </li>
@@ -360,14 +475,14 @@
       <pre class="lines">
 
 
-20
-21
-22
-23
-24</pre>
+90
+91
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/utils/ansi_style_manager.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/utils/ansi_style_manager.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_string'>string</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Need initialize with a string</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span>
@@ -397,8 +512,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns the string to which ANSI styles will be applied.</p>
+    <p>Returns the string to which ANSI styles will be applied.</p>
 
 
   </div>
@@ -416,8 +530,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the string to which ANSI styles will be applied.</p>
+        <div class='inline'><p>the string to which ANSI styles will be applied.</p>
 </div>
       
     </li>
@@ -430,12 +543,12 @@
       <pre class="lines">
 
 
-14
-15
-16</pre>
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/utils/ansi_style_manager.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/utils/ansi_style_manager.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_string'>string</span>
   <span class='ivar'>@string</span>
@@ -463,8 +576,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p class="note returns_void">This method returns an undefined value.</p>
-<p>Replaces all color and effect tokens in the string with corresponding ANSI codes.</p>
+    <p class="note returns_void">This method returns an undefined value.</p><p>Replaces all color and effect tokens in the string with corresponding ANSI codes.</p>
 
 
   </div>
@@ -478,13 +590,13 @@
       <pre class="lines">
 
 
-29
-30
-31
-32</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/utils/ansi_style_manager.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/utils/ansi_style_manager.rb', line 99</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_replace_all_tokens!'>replace_all_tokens!</span>
   <span class='id identifier rubyid_replace_color_tokens!'>replace_color_tokens!</span>
@@ -506,8 +618,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p class="note returns_void">This method returns an undefined value.</p>
-<p>Replaces all color tokens in the string with corresponding ANSI codes.</p>
+    <p class="note returns_void">This method returns an undefined value.</p><p>Replaces all color tokens in the string with corresponding ANSI codes.</p>
 
 
   </div>
@@ -521,22 +632,22 @@
       <pre class="lines">
 
 
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49</pre>
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/utils/ansi_style_manager.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/utils/ansi_style_manager.rb', line 107</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_replace_color_tokens!'>replace_color_tokens!</span>
   <span class='id identifier rubyid_scan_while_find'>scan_while_find</span><span class='lparen'>(</span><span class='const'>CONSTANTS</span><span class='op'>::</span><span class='const'>ANSI</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="CONSTANTS/ANSI.html#COLORS-constant" title="CONSTANTS::ANSI::COLORS (constant)">COLORS</a></span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
@@ -567,8 +678,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p class="note returns_void">This method returns an undefined value.</p>
-<p>Replaces all effect tokens in the string with corresponding ANSI codes.</p>
+    <p class="note returns_void">This method returns an undefined value.</p><p>Replaces all effect tokens in the string with corresponding ANSI codes.</p>
 
 
   </div>
@@ -582,20 +692,20 @@
       <pre class="lines">
 
 
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64</pre>
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/utils/ansi_style_manager.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/utils/ansi_style_manager.rb', line 124</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_replace_effect_tokens!'>replace_effect_tokens!</span>
   <span class='id identifier rubyid_scan_while_find'>scan_while_find</span><span class='lparen'>(</span><span class='const'>CONSTANTS</span><span class='op'>::</span><span class='const'>ANSI</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="CONSTANTS/ANSI.html#EFFECTS-constant" title="CONSTANTS::ANSI::EFFECTS (constant)">EFFECTS</a></span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
@@ -624,8 +734,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Converts the string with all tokens replaced by corresponding ANSI codes.</p>
+    <p>Converts the string with all tokens replaced by corresponding ANSI codes.</p>
 
 
   </div>
@@ -643,8 +752,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The string with ANSI codes applied.</p>
+        <div class='inline'><p>The string with ANSI codes applied.</p>
 </div>
       
     </li>
@@ -657,13 +765,13 @@
       <pre class="lines">
 
 
-69
-70
-71
-72</pre>
+139
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/utils/ansi_style_manager.rb', line 69</span>
+      <pre class="code"><span class="info file"># File 'lib/utils/ansi_style_manager.rb', line 139</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_replace_all_tokens!'>replace_all_tokens!</span>
@@ -679,7 +787,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jul  1 13:49:59 2024 by
+  Generated on Tue Jul  2 23:11:20 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-2.6.10).
 </div>
