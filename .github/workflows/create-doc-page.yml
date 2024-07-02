@@ -21,7 +21,7 @@ jobs:
 
       - name: Gerar documentação
         run: |
-          yard doc
+          rake doc:generate
           mkdir -p docs
           mv -f doc/* docs/
 
