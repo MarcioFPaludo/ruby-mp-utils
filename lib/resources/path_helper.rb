@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 # The Resources module manages and provides access to file system paths used by a script or application.
+#
 # It facilitates the definition and retrieval of a default library path, alongside a customizable path
-# that can be set at runtime either programmatically using the {define} method or through the environment
-# variable "SCRIPT_CUSTOM_RESOURCES". This flexibility allows applications to dynamically access resources
-# stored in various locations, depending on execution environment or user-defined settings.
+# that can be set at runtime either programmatically using the {define} method or through the
+# environment variable "SCRIPT_CUSTOM_RESOURCES".
+#
+# This flexibility allows applications to dynamically access resources stored in various locations,
+# depending on execution environment or user-defined settings.
 module Resources
   # Retrieves the path to the directory containing this module, which serves as the default library path.
   #

@@ -4,11 +4,79 @@ require_relative 'constants'
 require_relative 'ansi'
 
 # The ANSIStyleManager class is responsible for managing and applying ANSI styles to a given string.
-# It can replace tokens in the string with corresponding ANSI codes for colors and effects.
 #
-# @example
-#   manager = ANSIStyleManager.new("Hello <color:red>World</color>")
-#   puts manager.to_s # => "Hello \e[31mWorld\e[39m"
+# It can replace tokens in the string with corresponding ANSI codes for colors, backgrounds and effects.
+#
+# ## Effects
+# Effects can be used by adding `<effect:effect_name>` at the beginning and `</effect>` at the end of
+# the sequence of characters to which you want the effect to be applied.
+#
+# Example:
+# ```ruby
+# manager = ANSIStyleManager.new('The text <effect:bold>Potato</effect> will be bold.')
+# puts manager
+# ```
+# Output:
+#
+# ![bold output](./.resources/images/bold_effect_example.png)
+#
+# Below is the table with all available effects:
+#
+# | Effect Name   | Description                |
+# |---------------|----------------------------|
+# | bold          | set bold mode.             |
+# | faint         | set dim/faint mode.        |
+# | italic        | set italic mode.           |
+# | underline     | set underline mode.        |
+# | blinking      | set blinking mode.         |
+# | inverse       | set inverse/reverse mode.  |
+# | hidden        | set hidden/invisible mode. |
+# | strike        | set strikethrough mode.    |
+# | plain         | set double underline mode. |
+#
+# > **Note:** Some terminals may not support some of the effects listed above.
+#
+# ## Colors
+# The ANSIStyleManager supports 3 types of coloring: Named Colors, RGB Colors, or 256 Colors.
+#
+# The foreground color can be changed by adding `<color:color_type>` at the beginning and `</color>` at the end of the character sequence you want to color.
+#
+# Example:
+# ```ruby
+# text  = 'A <color:green>colorful <color:red>world <color:yellow>is <color:blue>much '
+# text += '</color>more </color>beautiful</color>!</color> ;)'
+# manager = ANSIStyleManager.new(text)
+# puts manager
+# ```
+# Output:
+#
+# ![colored output](./.resources/images/foreground_colored_example.png)
+#
+# It is also possible to set the background color of a text.
+#
+# The background color can be changed by adding `<color:color_type:color_type>` at the beginning and `</color>` at the end of the character sequence you want to color.
+#
+# Example:
+# ```ruby
+# text  = 'A <color:green:white>colorful <color:196>world <color:yellow:111>is <color:blue:255;255;255>much '
+# text += '</color>more </color>beautiful</color>!</color> ;)'
+# manager = ANSIStyleManager.new(text)
+# puts manager
+# ```
+#
+# Output:
+#
+# ![colored output](./.resources/images/background_colored_exemple.png)
+#
+# Below is the table with all available color type patterns:
+#
+# |Color Type   |Pattern |Description                                                                                  |
+# |-------------|--------|---------------------------------------------------------------------------------------------|
+# |Reset colors |reset   |Resets to the terminal's default color.                                                      |
+# |256 Colors   |number  |Accepts numbers between 0 and 255.                                                           |
+# |RGB Colors   |R;G;B   |R, G, and B accept values between 0 and 255.                                                 |
+# |Named Colors |name    |Accepts the following color names: black, red, green, yellow, blue, magenta, cyan and white. |
+#
 class ANSIStyleManager
   # @return [String] the string to which ANSI styles will be applied.
   attr_reader :string
