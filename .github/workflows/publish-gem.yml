@@ -1,6 +1,7 @@
 name: Create a release for the gem
 
 on:
+  workflow_dispatch:
   workflow_call:
   
 jobs:
