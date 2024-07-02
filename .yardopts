@@ -1,0 +1,5 @@
+lib/**/*.rb
+--exclude test/*
+--format html
+--title "MPUtils Documentation"
+--markup markdown
