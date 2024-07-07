@@ -6,7 +6,7 @@ on:
       - closed
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 jobs:
