@@ -4,6 +4,120 @@ require 'yaml'
 
 # Class to represent and process a directory structure.
 # It can be initialized with a hash or a YAML file.
+#
+# ## Using HASH
+#
+# The following example shows how to use DirectoryStructure with a hash.
+# ```ruby
+# hash = {
+#   'lib' => {
+#     'version.rb' => nil,
+#     'source' => [
+#       'file_1.rb',
+#       'file_2.rb',
+#       'file_3.rb'
+#     ],
+#     'resource' => {
+#       'images' => [
+#         'potato.png',
+#         'fries.jpeg',
+#         'franch_fries.png'
+#       ],
+#       'scripts' => {
+#         validation: 'teste.rb',
+#         sorting: [
+#           'shellsort.rb',
+#           'quicksort.rb'
+#         ],
+#         'build.rb' => nil
+#       }
+#     },
+#     generated: 'file.generated.rb'
+#   }
+# }
+# directory_structure = DirectoryStructure.new(hash)
+# puts "That is my directory structure:\n#{directory_structure}"
+# # Output:
+# # That is my directory structure:
+# # lib
+# # ╠═ version.rb
+# # ╠═ source
+# # ║  ╠═ file_1.rb
+# # ║  ╠═ file_2.rb
+# # ║  ╚═ file_3.rb
+# # ╠═ resource
+# # ║  ╠═ images
+# # ║  ║  ╠═ potato.png
+# # ║  ║  ╠═ fries.jpeg
+# # ║  ║  ╚═ franch_fries.png
+# # ║  ╚═ scripts
+# # ║     ╠═ validation
+# # ║     ║  ╚═ teste.rb
+# # ║     ╠═ sorting
+# # ║     ║  ╠═ shellsort.rb
+# # ║     ║  ╚═ quicksort.rb
+# # ║     ╚═ build.rb
+# # ╚═ generated
+# #    ╚═ file.generated.rb
+# ```
+#
+# ## Using a YAML/YML File
+#
+# First, you need to create a yml file.
+#
+# Example:
+# ```yml
+# lib:
+#   version.rb:
+#   source:
+#   - file_1.rb
+#   - file_2.rb
+#   - file_3.rb
+#   resource:
+#     images:
+#     - potato.png
+#     - fries.jpeg
+#     - franch_fries.png
+#     scripts:
+#       validation: teste.rb
+#       sorting:
+#       - shellsort.rb
+#       - quicksort.rb
+#       build.rb:
+#   generated: file.generated.rb
+# ```
+#
+# Considering that the file path is passed as a reference.
+#
+# You can initialize the class as in the example below:
+#
+# ```ruby
+# path = 'Replace/By/Your/YAML/FILE/PATH'
+# directory_structure = DirectoryStructure.new(path)
+# puts "That is my directory structure:\n#{directory_structure}"
+# # Output:
+# # That is my directory structure:
+# # lib
+# # ╠═ version.rb
+# # ╠═ source
+# # ║  ╠═ file_1.rb
+# # ║  ╠═ file_2.rb
+# # ║  ╚═ file_3.rb
+# # ╠═ resource
+# # ║  ╠═ images
+# # ║  ║  ╠═ potato.png
+# # ║  ║  ╠═ fries.jpeg
+# # ║  ║  ╚═ franch_fries.png
+# # ║  ╚═ scripts
+# # ║     ╠═ validation
+# # ║     ║  ╚═ teste.rb
+# # ║     ╠═ sorting
+# # ║     ║  ╠═ shellsort.rb
+# # ║     ║  ╚═ quicksort.rb
+# # ║     ╚═ build.rb
+# # ╚═ generated
+# #    ╚═ file.generated.rb
+# ```
 class DirectoryStructure
   # Initializes the DirectoryStructure object.
   #
