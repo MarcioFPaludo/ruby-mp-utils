@@ -49,7 +49,6 @@ RSpec.describe DirectoryStructure do
 
     context 'when initialized with a valid YAML file' do
       it 'does not raise an error' do
-        puts "Log:\t#{yaml_content}"
         expect { DirectoryStructure.new(yaml_content) }.not_to raise_error
       end
     end
