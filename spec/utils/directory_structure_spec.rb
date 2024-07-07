@@ -35,7 +35,7 @@ RSpec.describe DirectoryStructure do
 
   let(:yaml_content) do
     File.join(
-      __dir__.gsub('utils', 'resources'),
+      Resources.library_path.gsub('lib', 'spec'),
       'test_directory_structure.yml'
     )
   end
