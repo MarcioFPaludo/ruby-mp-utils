@@ -20,6 +20,7 @@ jobs:
       uses: step-security/wait-for-secrets@v1
       id: wait-for-secrets
       with:
+        slack-webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
         secrets: |
           OTP: 
             name: 'OTP to publish package'
