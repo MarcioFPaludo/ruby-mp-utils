@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
-# Extension to Ruby's Array class to enhance functionality.
+# Extension to Ruby's Array class to enhance functionality.  
 class Array
-  # Lists all elements in the array with their index.
+  # Lists all elements in the array with their index.  
   #
-  # This method outputs each element of the array to the console, prefixed by its index (1-based).
-  # The index is right-justified based on the length of the array, ensuring a tidy, column-aligned output.
+  # This method outputs each element of the array to the console, prefixed by its index (1-based).  
+  # The index is right-justified based on the length of the array, ensuring a tidy, column-aligned output.  
   #
-  # Example output for a 3-element array:
-  #   |1| Element 1
-  #   |2| Element 2
-  #   |3| Element 3
+  # @example
+  #   # output for a 3-element array:  
+  #   |1| Element 1  
+  #   |2| Element 2  
+  #   |3| Element 3  
   #
   # @return [void]
   def list_all_elements

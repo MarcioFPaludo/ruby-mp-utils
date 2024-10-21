@@ -16,5 +16,7 @@ group :development do
   gem 'redcarpet'
   gem 'rubocop'
   gem 'solargraph'
+  # Yard dependencies
+  gem 'webrick'
   gem 'yard'
 end

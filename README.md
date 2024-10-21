@@ -116,7 +116,7 @@ message = Message.new('example/message', replaces: custom_replaces)
 puts message.to_s  
 ```  
 Output:  
-![Code Output](./.resources/images/foreground_colored_example.png)  
+![Code Output](./images/foreground_colored_example.png)  
 
 For more information about colors, backgrounds, and effects, consult the [documentation of ANSIStyleManager](https://marciofpaludo.github.io/ruby-mp-utils/ANSIStyleManager.html).  
 

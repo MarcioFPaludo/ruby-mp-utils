@@ -1,3 +1,17 @@
 {
-    "simplecov-vscode.enabled": true
+    "simplecov-vscode.enabled": true,
+    "[ruby]": {
+        "editor.defaultFormatter": "Shopify.ruby-lsp",
+        "editor.semanticHighlighting.enabled": true,
+        "files.trimTrailingWhitespace": false,
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.rulers": [
+            120
+        ],
+    },
 }

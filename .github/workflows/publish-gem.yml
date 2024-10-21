@@ -16,6 +16,16 @@ jobs:
       with:
         ruby-version: '2.6'
 
+    - name: Setup OTP await
+      uses: step-security/wait-for-secrets@v1
+      id: wait-for-secrets
+      with:
+        slack-webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
+        secrets: |
+          OTP: 
+            name: 'OTP to publish package'
+            description: 'OTP from authenticator app'
+    
     - name: Install dependencies
       run: bundle check || bundle install -j 20
 
@@ -25,5 +35,4 @@ jobs:
     - name: Publish gem
       env:
         GEM_HOST_API_KEY: ${{ secrets.GEM_HOST_API_KEY }}
-        GEM_HOST_OTP_CODE: ${{ secrets.GEM_HOST_OTP_CODE }}
-      run: gem push mp-utils-*.gem
+      run: gem push mp-utils-*.gem --otp ${{ steps.wait-for-secrets.outputs.OTP }}

@@ -12,5 +12,7 @@
 AllCops:
   TargetRubyVersion: 2.6
 
+Layout/TrailingWhitespace:
+  Enabled: false
 Metrics/BlockLength:
   Enabled: false

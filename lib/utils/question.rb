@@ -3,9 +3,9 @@
 require_relative 'message'
 require_relative 'array'
 
-# The Question class facilitates the creation and management of interactive questions in the console.
+# The Question class facilitates the creation and management of interactive questions in the console.  
 # It provides methods to validate and return user input as various data types including boolean,
-# float, integer, options (from a list), and string.
+# float, integer, options (from a list), and string.  
 class Question
   # Initializes a new instance of the Question class.
   #
@@ -93,11 +93,11 @@ class Question
     end
   end
 
-  # Reads an index input from the user, ensuring it falls within a specified range.
+  # Reads an index input from the user, ensuring it falls within a specified range.  
   #
   # This method prompts the user to enter an index number. It validates the input to ensure
   # it is an integer within the range of 0 to (count - 1). If the input is invalid, an error
-  # message is displayed, and the user is prompted again.
+  # message is displayed, and the user is prompted again.  
   #
   # @param count [Integer] The count of items, setting the upper limit of the valid index range.
   # @param error_message [String, nil] Custom error message for invalid index inputs.
