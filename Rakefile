@@ -45,8 +45,8 @@ namespace :doc do
   desc 'Generate all needed documentation'
   task :generate do
     system('yard doc')
-    source_dir = '.resources/images'
-    destination_dir = 'doc/.resources/images'
+    source_dir = 'images'
+    destination_dir = 'doc/images'
     FileUtils.mkdir_p(destination_dir)
     Dir.glob("#{source_dir}/*.{png,jpg,jpeg,gif}").each do |image|
       FileUtils.cp(image, destination_dir)
