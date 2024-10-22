@@ -101,12 +101,10 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The Message class represents a mechanism for dynamically handling and formatting messages.</p>
-
-<p>It supports the substitution of placeholders within a message template with actual data.</p>
-
-<p>The class leverages file-based message templates, allowing for easy localization or
-customization of messages.</p>
+    <p>The Message class represents a mechanism for dynamically handling and formatting messages.<br>
+It supports the substitution of placeholders within a message template with actual data.<br>
+The class leverages file-based message templates, allowing for easy localization or
+customization of messages.  </p>
 
 <p>It integrates seamlessly with the Resources module to access these templates from
 a customizable path set via the &quot;SCRIPT_CUSTOM_RESOURCES&quot; environment variable or
@@ -118,11 +116,11 @@ from a default library path.</p>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Creating a new Message instance and formatting it</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Creating a new Message instance and formatting it</p>
+</div></h5>
       
       <pre class="example code"><code><span class='comment'># Assuming &quot;hellow_world&quot; is a file that says &quot;Hello, world!&quot;
 </span><span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='const'>Message</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Message#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hellow_world</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -317,15 +315,15 @@ from a default library path.</p>
       <pre class="lines">
 
 
+26
+27
 28
 29
 30
-31
-32
-33</pre>
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/utils/message.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/utils/message.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='label'>replaces:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Messsage replaces content need be a Hash</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_replaces'>replaces</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_replaces'>replaces</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
@@ -370,12 +368,12 @@ from a default library path.</p>
       <pre class="lines">
 
 
-22
-23
-24</pre>
+20
+21
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/utils/message.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/utils/message.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_message'>message</span>
   <span class='ivar'>@message</span>
@@ -453,12 +451,12 @@ from a default library path.</p>
       <pre class="lines">
 
 
-39
-40
-41</pre>
+37
+38
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/utils/message.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'lib/utils/message.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@message</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span>
@@ -479,10 +477,11 @@ from a default library path.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts the message template into a string, replacing any placeholders with actual data.
+    <p>Converts the message template into a string, replacing any placeholders with actual data.<br>
 This method searches for keys within the message and replaces them with corresponding
 content from message files located in either the custom path or the library path and appling
-the given replaces.</p>
+the given replaces.<br>
+If the file name have the suffix &quot;.aas.txt&quot;, the ANSIStyleManager will be applied to the file.</p>
 
 
   </div>
@@ -513,13 +512,13 @@ the given replaces.</p>
       <pre class="lines">
 
 
+48
 49
 50
-51
-52</pre>
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/utils/message.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/utils/message.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_new_message'>new_message</span> <span class='op'>=</span> <span class='id identifier rubyid_replace_message_keys'>replace_message_keys</span><span class='lparen'>(</span><span class='const'>String</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@message</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -535,9 +534,9 @@ the given replaces.</p>
 </div>
 
       <div id="footer">
-  Generated on Sun Jul  7 23:13:30 2024 by
+  Generated on Tue Oct 22 17:53:49 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-2.6.10).
+  0.9.37 (ruby-2.6.10).
 </div>
 
     </div>

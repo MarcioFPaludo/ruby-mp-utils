@@ -101,26 +101,26 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The ANSIStyleManager class is responsible for managing and applying ANSI styles to a given string.</p>
+    <p>The ANSIStyleManager class is responsible for managing and applying ANSI styles to a given string.  </p>
 
-<p>It can replace tokens in the string with corresponding ANSI codes for colors, backgrounds and effects.</p>
+<p>It can replace tokens in the string with corresponding ANSI codes for colors, backgrounds and effects.  </p>
 
 <h2 id="effects">Effects</h2>
 
 <p>Effects can be used by adding <code>&lt;effect:effect_name&gt;</code> at the beginning and <code>&lt;/effect&gt;</code> at the end of
-the sequence of characters to which you want the effect to be applied.</p>
+the sequence of characters to which you want the effect to be applied.  </p>
 
-<p>Example:</p>
+<p>Example:  </p>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_manager'>manager</span> <span class='op'>=</span> <span class='const'>ANSIStyleManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSIStyleManager#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>The text &lt;effect:bold&gt;Potato&lt;/effect&gt; will be bold.</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
-<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_manager'>manager</span>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_manager'>manager</span> <span class='op'>=</span> <span class='const'>ANSIStyleManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSIStyleManager#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>The text &lt;effect:bold&gt;Potato&lt;/effect&gt; will be bold.</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>  
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_manager'>manager</span>  
 </code></pre>
 
-<p>Output:</p>
+<p>Output:  </p>
 
-<p><img src="./.resources/images/bold_effect_example.png" alt="bold output"></p>
+<p><img src="./images/bold_effect_example.png" alt="bold_effect"></p>
 
-<p>Below is the table with all available effects:</p>
+<p>Below is the table with all available effects:  </p>
 
 <table><thead>
 <tr>
@@ -167,46 +167,46 @@ the sequence of characters to which you want the effect to be applied.</p>
 </tbody></table>
 
 <blockquote>
-<p><strong>Note:</strong> Some terminals may not support some of the effects listed above.</p>
+<p><strong>Note:</strong> Some terminals may not support some of the effects listed above.  </p>
 </blockquote>
 
 <h2 id="colors">Colors</h2>
 
-<p>The ANSIStyleManager supports 3 types of coloring: Named Colors, RGB Colors, or 256 Colors.</p>
+<p>The ANSIStyleManager supports 3 types of coloring: Named Colors, RGB Colors, or 256 Colors.  </p>
 
 <p>The foreground color can be changed by adding <code>&lt;color:color_type&gt;</code> at the beginning and <code>&lt;/color&gt;</code>
-at the end of the character sequence you want to color.</p>
+at the end of the character sequence you want to color.  </p>
 
-<p>Example:</p>
+<p>Example:  </p>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_text'>text</span>  <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>A &lt;color:green&gt;colorful &lt;color:red&gt;world &lt;color:yellow&gt;is &lt;color:blue&gt;much </span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_text'>text</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;/color&gt;more &lt;/color&gt;beautiful&lt;/color&gt;!&lt;/color&gt; ;)</span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_manager'>manager</span> <span class='op'>=</span> <span class='const'>ANSIStyleManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSIStyleManager#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_manager'>manager</span>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_text'>text</span>  <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>A &lt;color:green&gt;colorful &lt;color:red&gt;world &lt;color:yellow&gt;is &lt;color:blue&gt;much </span><span class='tstring_end'>&#39;</span></span>  
+<span class='id identifier rubyid_text'>text</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;/color&gt;more &lt;/color&gt;beautiful&lt;/color&gt;!&lt;/color&gt; ;)</span><span class='tstring_end'>&#39;</span></span>  
+<span class='id identifier rubyid_manager'>manager</span> <span class='op'>=</span> <span class='const'>ANSIStyleManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSIStyleManager#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>  
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_manager'>manager</span>  
 </code></pre>
 
-<p>Output:</p>
+<p>Output:  </p>
 
-<p><img src="./.resources/images/foreground_colored_example.png" alt="colored output"></p>
+<p><img src="./images/foreground_colored_example.png" alt="colored output">  </p>
 
-<p>It is also possible to set the background color of a text.</p>
+<p>It is also possible to set the background color of a text.  </p>
 
 <p>The background color can be changed by adding <code>&lt;color:color_type:color_type&gt;</code> at the
-beginning and <code>&lt;/color&gt;</code> at the end of the character sequence you want to color.</p>
+beginning and <code>&lt;/color&gt;</code> at the end of the character sequence you want to color.  </p>
 
-<p>Example:</p>
+<p>Example:  </p>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_text'>text</span>  <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>A &lt;color:green:white&gt;colorful &lt;color:196&gt;world &lt;color:yellow:111&gt;is &lt;color:blue:255;255;255&gt;much </span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_text'>text</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;/color&gt;more &lt;/color&gt;beautiful&lt;/color&gt;!&lt;/color&gt; ;)</span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_manager'>manager</span> <span class='op'>=</span> <span class='const'>ANSIStyleManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSIStyleManager#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_manager'>manager</span>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_text'>text</span>  <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>A &lt;color:green:white&gt;colorful &lt;color:196&gt;world &lt;color:yellow:111&gt;is &lt;color:blue:255;255;255&gt;much </span><span class='tstring_end'>&#39;</span></span>  
+<span class='id identifier rubyid_text'>text</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;/color&gt;more &lt;/color&gt;beautiful&lt;/color&gt;!&lt;/color&gt; ;)</span><span class='tstring_end'>&#39;</span></span>  
+<span class='id identifier rubyid_manager'>manager</span> <span class='op'>=</span> <span class='const'>ANSIStyleManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSIStyleManager#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>  
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_manager'>manager</span>  
 </code></pre>
 
-<p>Output:</p>
+<p>Output:  </p>
 
-<p><img src="./.resources/images/background_colored_exemple.png" alt="colored output"></p>
+<p><img src="./images/background_colored_exemple.png" alt="colored output">  </p>
 
-<p>Below is the table with all available color type patterns:</p>
+<p>Below is the table with all available color type patterns:  </p>
 
 <table><thead>
 <tr>
@@ -787,9 +787,9 @@ beginning and <code>&lt;/color&gt;</code> at the end of the character sequence y
 </div>
 
       <div id="footer">
-  Generated on Sun Jul  7 23:13:30 2024 by
+  Generated on Tue Oct 22 17:53:49 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-2.6.10).
+  0.9.37 (ruby-2.6.10).
 </div>
 
     </div>

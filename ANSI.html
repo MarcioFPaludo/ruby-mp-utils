@@ -101,7 +101,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The ANSI class is responsible for generating ANSI codes for text styling in terminals.
+    <p>The ANSI class is responsible for generating ANSI codes for text styling in terminals.<br>
 It allows the combination of multiple style and color codes.</p>
 
 
@@ -110,15 +110,15 @@ It allows the combination of multiple style and color codes.</p>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-      <pre class="example code"><code><span class='id identifier rubyid_ansi'>ansi</span> <span class='op'>=</span> <span class='const'>ANSI</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSI#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='symbol'>:bold</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_ansi'>ansi</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># =&gt; &quot;\e[1m&quot;</span></code></pre>
+      <pre class="example code"><code><span class='id identifier rubyid_ansi'>ansi</span> <span class='op'>=</span> <span class='const'>ANSI</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSI#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='symbol'>:bold</span><span class='rparen'>)</span>  
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_ansi'>ansi</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># =&gt; &quot;\e[1m&quot;  </span></code></pre>
     
       
-      <pre class="example code"><code><span class='id identifier rubyid_ansi'>ansi</span> <span class='op'>=</span> <span class='const'>ANSI</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSI#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='symbol'>:bold</span><span class='comma'>,</span> <span class='symbol'>:red</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_ansi'>ansi</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># =&gt; &quot;\e[1;31m&quot;</span></code></pre>
+      <pre class="example code"><code><span class='id identifier rubyid_ansi'>ansi</span> <span class='op'>=</span> <span class='const'>ANSI</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ANSI#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='symbol'>:bold</span><span class='comma'>,</span> <span class='symbol'>:red</span><span class='rbracket'>]</span><span class='rparen'>)</span>  
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_ansi'>ansi</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># =&gt; &quot;\e[1;31m&quot;  </span></code></pre>
     
   </div>
 
@@ -835,9 +835,9 @@ It allows the combination of multiple style and color codes.</p>
 </div>
 
       <div id="footer">
-  Generated on Sun Jul  7 23:13:30 2024 by
+  Generated on Tue Oct 22 17:53:49 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-2.6.10).
+  0.9.37 (ruby-2.6.10).
 </div>
 
     </div>

@@ -167,21 +167,27 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p class="note returns_void">This method returns an undefined value.</p><p>Lists all elements in the array with their index.</p>
+    <p class="note returns_void">This method returns an undefined value.</p><p>Lists all elements in the array with their index.  </p>
 
-<p>This method outputs each element of the array to the console, prefixed by its index (1-based).
+<p>This method outputs each element of the array to the console, prefixed by its index (1-based).<br>
 The index is right-justified based on the length of the array, ensuring a tidy, column-aligned output.</p>
-
-<p>Example output for a 3-element array:
-  |1| Element 1
-  |2| Element 2
-  |3| Element 3</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code># output for a 3-element array:  
+|1| Element 1  
+|2| Element 2  
+|3| Element 3  </code></pre>
+    
+  </div>
+
 
 </div><table class="source_code">
   <tr>
@@ -189,15 +195,15 @@ The index is right-justified based on the length of the array, ensuring a tidy, 
       <pre class="lines">
 
 
-16
 17
 18
 19
 20
-21</pre>
+21
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/utils/array.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/utils/array.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_all_elements'>list_all_elements</span>
   <span class='id identifier rubyid_index_size'>index_size</span> <span class='op'>=</span> <span class='id identifier rubyid_count'>count</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span>
@@ -215,9 +221,9 @@ The index is right-justified based on the length of the array, ensuring a tidy, 
 </div>
 
       <div id="footer">
-  Generated on Sun Jul  7 23:13:30 2024 by
+  Generated on Tue Oct 22 17:53:49 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-2.6.10).
+  0.9.37 (ruby-2.6.10).
 </div>
 
     </div>
