@@ -3,6 +3,18 @@
 require_relative '../../lib/utils/ansi'
 
 RSpec.describe ANSI do
+  describe '.remove_from_string' do
+    it 'removes ANSI escape codes from a string' do
+      string_with_ansi = "\e[31mHello\e[0m World"
+      expect(ANSI.remove_from_string(string_with_ansi)).to eq('Hello World')
+    end
+
+    it 'returns the same string if there are no ANSI codes' do
+      plain_string = 'Hello World'
+      expect(ANSI.remove_from_string(plain_string)).to eq('Hello World')
+    end
+  end
+  
   describe '#initialize' do
     it 'initializes with a symbol' do
       ansi = ANSI.new(:bold)

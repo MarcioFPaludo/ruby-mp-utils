@@ -1,0 +1,41 @@
+name: Create MPUtils Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump_version:
+        description: 'Define the version number to bump'
+        required: true
+        default: patch
+        type: choice
+        options:
+        - major
+        - minor
+        - patch
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  tests:
+    secrets: inherit
+    uses: ./.github/workflows/ruby-tests.yml
+  bump_version:
+    secrets: inherit
+    uses: ./.github/workflows/bump-version.yml
+    with: 
+        bump_version: ${{ inputs.bump_version }}
+  publish_gem:
+    needs: bump_version
+    secrets: inherit
+    uses: ./.github/workflows/publish-gem.yml
+  documentation:
+    needs: publish_gem
+    secrets: inherit
+    uses: ./.github/workflows/create-doc-page.yml
+#   git_release:
+#     needs: publish_gem
+#     secrets: inherit
+#     uses: ./.github/workflows/create-git-release.yml
+        

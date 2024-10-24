@@ -25,7 +25,7 @@ permissions:
 
 jobs:
   bump_version:
-    name: Build + Publish
+    name: Generate Bump Version
     runs-on: ubuntu-latest
     steps:
     - name: Check out the repository
@@ -44,16 +44,11 @@ jobs:
       run: |
         rake version:${{ inputs.bump_version }}
 
-    - name: Commit and push changes
-      run: |
-        git config --global user.name 'github-actions'
-        git config --global user.email 'github-actions@github.com'
-        git add lib/version.rb
-        git commit -m "Bump version to ${{ steps.bump_version.outputs.new_version }}"
-        git push
-
-    - name: Create new tag
-      run: |
-        new_version=${{ steps.bump_version.outputs.new_version }}
-        git tag "v$new_version"
-        git push origin "v$new_version"
+    - name: Commit changes and create tag
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: Bump version to ${{ steps.bump_version.outputs.new_version }}
+        tagging_message: 'v${{steps.bump_version.outputs.new_version}}'
+        commit_user_name: Bump Version Workflow
+        file_pattern: 'lib/version.rb'
+        branch: main
