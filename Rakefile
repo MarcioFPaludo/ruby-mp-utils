@@ -36,7 +36,7 @@ namespace :version do
       content.gsub!(/VERSION.+'#{MPUtils::VERSION}'/, "VERSION = '#{version}'")
       File.open(path, 'w') { |file| file << content }
 
-      system("echo \"{new_version}={#{version}}\" >> $GITHUB_OUTPUT")
+      system("echo \"new_version=#{version}\" >> $GITHUB_OUTPUT")
     end
   end
 end
