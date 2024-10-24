@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+require_relative 'question'
+require_relative 'message'
+require_relative 'ansi'
+require_relative 'key'
+
 # This class provides additional methods to the standard Ruby String class,
 # allowing for the removal of ANSI codes, and conversion to Key, Question,
 # and Message objects.  
