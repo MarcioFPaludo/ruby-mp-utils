@@ -69,6 +69,18 @@ class ANSI
   # @return [Array<Integer>] the ANSI codes stored in the instance.  
   attr_reader :codes
 
+  # Removes ANSI escape codes from a given string.
+  #
+  # This class method is designed to take a string input and remove any ANSI
+  # escape codes, which are often used for text formatting in terminal outputs.
+  #
+  # @param value [String] the string from which ANSI codes should be removed.
+  #   If the input is not a string, it will be converted to a string using `to_s`.
+  # @return [String] a new string with ANSI escape codes removed.
+  def self.remove_from_string(value)
+    value.to_s.gsub(CONSTANTS::ANSI::TOKEN_REGEX, '')
+  end
+
   # Initializes a new instance of the ANSI class.  
   #
   # @param code [Array<Symbol>, Symbol, String] One or more ANSI codes represented as symbols, integers, or strings.  
