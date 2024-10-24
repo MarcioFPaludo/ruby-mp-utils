@@ -22,6 +22,7 @@ jobs:
     secrets: inherit
     uses: ./.github/workflows/ruby-tests.yml
   bump_version:
+    needs: tests
     secrets: inherit
     uses: ./.github/workflows/bump-version.yml
     with: 
