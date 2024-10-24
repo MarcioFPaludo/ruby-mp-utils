@@ -1,4 +1,4 @@
-name: Create a release for the gem
+name: Publish Gem in ruby Gems
 
 on:
   workflow_dispatch:
