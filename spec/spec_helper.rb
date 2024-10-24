@@ -2,8 +2,10 @@
 
 require 'simplecov'
 
-SimpleCov.minimum_coverage 90
 SimpleCov.start do
+  minimum_coverage_by_file 80
+  minimum_coverage 90
+  
   add_filter 'spec'
   add_filter 'version.rb'
   add_filter 'mp_utils.rb'
