@@ -51,4 +51,5 @@ jobs:
         tagging_message: 'v${{steps.bump_version.outputs.new_version}}'
         commit_user_name: Bump Version Workflow
         file_pattern: 'lib/version.rb'
+        push_options: '--force'
         branch: main
